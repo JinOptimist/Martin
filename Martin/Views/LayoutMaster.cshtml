@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/main.css")">
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <title>@ViewBag.Title</title>
+
+    @RenderSection("Script", false)
+</head>
+<body>
+    <div>
+        @Html.ActionLink("Home", "Index", "Home")
+        @RenderBody()
+    </div>
+</body>
+</html>
