@@ -5,6 +5,10 @@ namespace Dao.IRepository
 {
     public interface IAlbumRepository
     {
-        List<Album> GetAlbums();
+        Album Get(long id);
+
+        List<Album> GetAll();
+
+        void Save(Album album);
     }
 }

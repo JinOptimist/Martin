@@ -1,4 +1,6 @@
-﻿namespace Dao.Model
+﻿using System.Collections.Generic;
+
+namespace Dao.Model
 {
     public class Album
     {
@@ -6,6 +8,10 @@
 
         public virtual string Name { get; set; }
 
-        public virtual string ImgUrl { get; set; }
+        public virtual string Description { get; set; }
+
+        public virtual string CoverUrl { get; set; }
+
+        public virtual List<Song> Songs { get; set; }
     }
 }

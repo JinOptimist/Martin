@@ -1,0 +1,24 @@
+﻿@model Dao.Model.Album
+
+@{
+    ViewBag.Title = "Add Album";
+    Layout = "~/Views/AdminMaster.cshtml";
+}
+
+<h2>Add Album</h2>
+
+@using (Html.BeginForm("Add", "Album", FormMethod.Post))
+{
+    <p>
+        Name @Html.TextBoxFor(x => x.Name)
+    </p>
+    <p>
+        Description @Html.TextBoxFor(x => x.Description)
+    </p>
+    <p>
+        CoverUrl @Html.TextBoxFor(x => x.CoverUrl)
+    </p>
+    <p>
+        <input type="submit" value="Save"/>
+    </p>
+}

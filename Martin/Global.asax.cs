@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Autofac;
+using Dao;
+using Dao.IRepository;
+using Dao.Migrations;
+using Dao.Model;
+using Dao.Repository;
 
 namespace Martin
 {
@@ -19,6 +26,17 @@ namespace Martin
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            var builder = new ContainerBuilder();
+            builder.RegisterType<AlbumRepository>();
+            builder.Register<IAlbumRepository>(x => x.Resolve<AlbumRepository>());
+
+            builder.RegisterType<SongRepository>();
+            builder.Register<ISongRepository>(x => x.Resolve<SongRepository>());
+
+            StaticContainer.Container = builder.Build();
+
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MartinContext, Configuration>());
         }
     }
 }

@@ -10,9 +10,10 @@
 </head>
 <body>
 <div>
-    <h1>User</h1>
-    @Html.ActionLink("Home", "Index", "Home")
-    ||| @Html.ActionLink("Admin", "Index", "Album")
+    <h3>Admin</h3>
+    @Html.ActionLink("List Album", "Index", "Album")
+    ||| @Html.ActionLink("Add Album", "Add", "Album")
+    ||| @Html.ActionLink("Add Song", "AddSong", "Album")
     @RenderBody()
 </div>
 </body>

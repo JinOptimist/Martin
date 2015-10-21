@@ -1,6 +1,8 @@
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Martin.dll.config
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Martin.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Martin.pdb
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Autofac.dll
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Dao.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\EntityFramework.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\EntityFramework.SqlServer.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Microsoft.Web.Infrastructure.dll
@@ -17,6 +19,8 @@ C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\System.Web.WebPages.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\System.Web.WebPages.Razor.dll
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Dao.pdb
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Autofac.xml
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\EntityFramework.xml
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\EntityFramework.SqlServer.xml
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Martin\bin\Newtonsoft.Json.xml

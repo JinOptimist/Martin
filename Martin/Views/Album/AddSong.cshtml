@@ -1,0 +1,26 @@
+﻿@using Dao.Model
+@model Martin.ViewModel.SongViewModel
+
+@{
+    ViewBag.Title = "Song Add";
+    Layout = "~/Views/AdminMaster.cshtml";
+}
+
+<h2>Song Add</h2>
+@using (Html.BeginForm("AddSong", "Album", FormMethod.Post))
+{
+    <p>
+        Name @Html.TextBoxFor(x => x.Song.Name)
+    </p>
+
+    <p>
+        Lyrics @Html.TextBoxFor(x => x.Song.Lyrics)
+    </p>
+
+    <p>
+        Album @Html.DropDownListFor(x => x.Song.Album.Id, new SelectList(Model.AlbumsList, "Id", "Name"))
+    </p>
+    <p>
+        <input type="submit" value="Save"/>
+    </p>
+}

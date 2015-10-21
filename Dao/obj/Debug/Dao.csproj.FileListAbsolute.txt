@@ -1,8 +1,13 @@
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\Dao.dll.config
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\Dao.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\Dao.pdb
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\EntityFramework.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\EntityFramework.xml
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\obj\Debug\Dao.csprojResolveAssemblyReference.cache
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\obj\Debug\Dao.Migrations.InitDB.resources
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\obj\Debug\Dao.Migrations.AddSongTable.resources
+C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\obj\Debug\Dao.csproj.GenerateResource.Cache
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\obj\Debug\Dao.dll
 C:\Users\Pavel_Lvou@epam.com\Documents\Visual Studio 2013\Projects\Martin\Dao\obj\Debug\Dao.pdb
