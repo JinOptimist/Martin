@@ -5,20 +5,20 @@
     Layout = "~/Views/AdminMaster.cshtml";
 }
 
-<h2>Add Album</h2>
+<h2>Добавить Альбом</h2>
 
-@using (Html.BeginForm("Add", "Album", FormMethod.Post))
+@using (Html.BeginForm("Add", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <p>
-        Name @Html.TextBoxFor(x => x.Name)
+        Имя альбома: @Html.TextBoxFor(x => x.Name)
     </p>
     <p>
-        Description @Html.TextBoxFor(x => x.Description)
+        Описание: @Html.TextBoxFor(x => x.Description)
     </p>
     <p>
-        CoverUrl @Html.TextBoxFor(x => x.CoverUrl)
+        Обложка: <input type="file" name="Cover"/>
     </p>
     <p>
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Сохранить"/>
     </p>
 }

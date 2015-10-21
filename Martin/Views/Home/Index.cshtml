@@ -5,8 +5,29 @@
     Layout = "~/Views/LayoutMaster.cshtml";
 }
 
-<h2>title</h2>
 @if (Model != null)
 {
-    
+    foreach (var album in Model)
+    {
+        <div class="clear-left">
+            <h1 class="album-name">@album.Name</h1>
+            <div class="admin-album-block">
+                <img  class="album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" />
+            </div>
+
+            <div class="admin-album-block">
+                <p>Description @album.Description</p>
+            </div>
+
+            <div class="admin-album-block">
+                <p>Songs</p>
+                @foreach (var song in album.Songs)
+                {
+                    <p>
+                        <a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a>
+                    </p>
+                }
+            </div>
+        </div>
+    }
 }

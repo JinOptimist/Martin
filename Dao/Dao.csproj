@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201510211342526_AddSongTable.Designer.cs">
       <DependentUpon>201510211342526_AddSongTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510211500443_AddFileNameForCoverAndMp3.cs" />
+    <Compile Include="Migrations\201510211500443_AddFileNameForCoverAndMp3.Designer.cs">
+      <DependentUpon>201510211500443_AddFileNameForCoverAndMp3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\Album.cs" />
@@ -78,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510211342526_AddSongTable.resx">
       <DependentUpon>201510211342526_AddSongTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510211500443_AddFileNameForCoverAndMp3.resx">
+      <DependentUpon>201510211500443_AddFileNameForCoverAndMp3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

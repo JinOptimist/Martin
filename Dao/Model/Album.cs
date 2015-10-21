@@ -10,7 +10,7 @@ namespace Dao.Model
 
         public virtual string Description { get; set; }
 
-        public virtual string CoverUrl { get; set; }
+        public virtual string CoverFileName { get; set; }
 
         public virtual List<Song> Songs { get; set; }
     }

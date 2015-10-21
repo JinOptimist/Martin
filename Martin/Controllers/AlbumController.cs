@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,8 +43,10 @@ namespace Martin.Controllers
         [HttpPost]
         public ActionResult Add(Album album)
         {
+            var coverPath = SaveAttach("cover");
+            album.CoverFileName = coverPath;
             AlbumRepository.Save(album);
-
+            
             return RedirectToAction("Index");
         }
 
@@ -57,10 +60,28 @@ namespace Martin.Controllers
         [HttpPost]
         public ActionResult AddSong(SongViewModel songViewModel)
         {
-            SongRepository.Save(songViewModel.Song);
+            var songName = SaveAttach("song");
+            var song = songViewModel.CreateSong();
+            song.Mp3FileName = songName;
+            SongRepository.Save(song);
             return RedirectToAction("Index");
         }
 
-        
+        private string SaveAttach(string folder)
+        {
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/"), folder, fileName);
+                    file.SaveAs(path);
+                    return fileName;
+                }
+            }
+
+            return string.Empty;
+        }
     }
 }

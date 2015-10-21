@@ -10,10 +10,20 @@
 </head>
 <body>
 <div>
-    <h1>User</h1>
-    @Html.ActionLink("Home", "Index", "Home")
-    ||| @Html.ActionLink("Admin", "Index", "Album")
-    @RenderBody()
+    <div class="navigation-top">
+        <div class="float-left"><img class="navigation-top-logo" src="~/Content/img/logo_white_150x150.png" /></div>
+        <ul style="float: right;">
+            <li>
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+            <li>
+                @Html.ActionLink("Admin", "Index", "Album")
+            </li>
+        </ul>
+    </div>
+    <div style="float: left; width: 100%;">
+        @RenderBody()
+    </div>
 </div>
 </body>
 </html>

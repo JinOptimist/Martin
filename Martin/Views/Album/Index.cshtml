@@ -11,6 +11,24 @@
 {
     foreach (var album in Model)
     {
-        <p>@album.Id * @album.Name * @album.Description</p>
+        <div>
+            <div class="admin-album-block clear-left">
+                <img src="@Url.Content("~/Content/cover/" + album.CoverFileName)" width="150" />
+            </div>
+
+            <div class="admin-album-block">
+                <p>№@album.Id</p>
+                <p>Name @album.Name</p>
+                <p>Description @album.Description</p>
+            </div>
+
+            <div class="admin-album-block">
+                <p>Songs</p>
+                @foreach (var song in album.Songs)
+                {
+                    <p><a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a></p>
+                }
+            </div>
+        </div>
     }
 }

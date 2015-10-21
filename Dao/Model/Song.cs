@@ -9,7 +9,7 @@
         //Text of record
         public virtual string Lyrics { get; set; }
 
-        public virtual string Mp3Path { get; set; }
+        public virtual string Mp3FileName { get; set; }
 
         public virtual Album Album { get; set; }
     }
