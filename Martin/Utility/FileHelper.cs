@@ -11,6 +11,12 @@ namespace Martin.Utility
             {
                 text.WriteLine(content);
             }
-        } 
+        }
+
+        public static string PathToSong(string albumName, string mp3FileName)
+        {
+            var path = Path.Combine("Content/Song", albumName, mp3FileName);
+            return path;
+        }
     }
 }

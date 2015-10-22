@@ -1,33 +1,66 @@
-﻿@model List<Dao.Model.Album>
+﻿@using Martin.Utility
+@model List<Dao.Model.Album>
 
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/LayoutMaster.cshtml";
 }
 
+@section Script
+{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/jquery.bxslider.css")">
+    <script src="~/Scripts/jquery.bxslider.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.content').bxSlider({
+                slideWidth: 1100,
+                minSlides: 1,
+                maxSlides: 1,
+                slideMargin: 10
+            });
+        });
+    </script>
+}
+
 @if (Model != null)
 {
-    foreach (var album in Model)
-    {
-        <div class="clear-left">
-            <h1 class="album-name">@album.Name</h1>
-            <div class="admin-album-block">
-                <img  class="album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" />
-            </div>
+    <div class="content clear-left">
+        @foreach (var album in Model)
+        {
+            <div class="slide">
+                <h1 class="album-name">@album.Name</h1>
+                <div class="admin-album-block">
+                    <img class="album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" />
+                </div>
 
-            <div class="admin-album-block">
-                <p>Description @album.Description</p>
-            </div>
+                <div class="admin-album-block">
+                    <p>@Html.ActionLink("Скачать альбом целиком", "GetAlbumInArchive", new { idAlbum = album.Id })</p>
+                </div>
+                
 
-            <div class="admin-album-block">
-                <p>Songs</p>
-                @foreach (var song in album.Songs)
-                {
-                    <p>
-                        <a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a>
-                    </p>
-                }
+                <div class="admin-album-block">
+                    <h4>Описание альбома</h4>
+                    <p>@album.Description</p>
+                </div>
+
+                <div class="admin-album-block">
+                    <h4>Песни</h4>
+                    @foreach (var song in album.Songs)
+                    {
+                        var songPath = @Url.Content("~/" + FileHelper.PathToSong(album.Name, song.Mp3FileName));
+                        <p>
+                            @song.Name
+                        </p>
+                        <p>
+                            <audio controls preload="none">
+                                <source src="@songPath" type="audio/mpeg">
+                                Ваш браузер не поддерживает HTML 5. Вы можете скачать трек.
+                            </audio>
+                            <a href="@songPath">Скачать песню</a>
+                        </p>
+                    }
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 }

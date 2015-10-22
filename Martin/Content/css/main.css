@@ -48,5 +48,7 @@
 
 .admin-album-block {
     float: left;
-    width: 300px;
+    margin: 10px;
+    background-color: antiquewhite;
+    /*width: 300px;*/
 }

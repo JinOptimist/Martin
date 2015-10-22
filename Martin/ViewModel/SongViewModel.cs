@@ -16,7 +16,7 @@ namespace Martin.ViewModel
 
         public List<AlbumForListBox> AlbumsList { get; set; }
 
-        public Song CreateSong()
+        public Song CreateSongModel()
         {
             var song = new Song
             {

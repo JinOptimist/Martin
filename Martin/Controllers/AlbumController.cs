@@ -46,7 +46,9 @@ namespace Martin.Controllers
             var coverPath = SaveAttach("cover");
             album.CoverFileName = coverPath;
             AlbumRepository.Save(album);
-            
+
+            Directory.CreateDirectory(Path.Combine(Server.MapPath("~/Content/song/"), album.Name));
+
             return RedirectToAction("Index");
         }
 
@@ -60,8 +62,9 @@ namespace Martin.Controllers
         [HttpPost]
         public ActionResult AddSong(SongViewModel songViewModel)
         {
-            var songName = SaveAttach("song");
-            var song = songViewModel.CreateSong();
+            var song = songViewModel.CreateSongModel();
+            var album = AlbumRepository.Get(song.Album.Id);
+            var songName = SaveAttach("song/" + album.Name);
             song.Mp3FileName = songName;
             SongRepository.Save(song);
             return RedirectToAction("Index");
