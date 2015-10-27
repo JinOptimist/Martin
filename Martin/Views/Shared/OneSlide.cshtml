@@ -1,0 +1,54 @@
+﻿@using Martin.Utility
+@model Martin.ViewModel.AlbumsHomeViewModel
+
+@{
+    var currentAlbum = Model.Albums.First(x => x.Id == Model.AlbumId);
+}
+
+<div class="slide">
+    <input type="hidden" id="albumId" value="@currentAlbum.Id" />
+    <input type="hidden" id="albumCover" value="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)" />
+    <div class="slide-center">
+        <div class="album-content">
+            <h1 class="album-name">@currentAlbum.Name</h1>
+            <div class="admin-album-block">
+                <img class="album-cover" src="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)"/>
+            </div>
+
+            <div class="admin-album-block">
+                <p>@Html.ActionLink("Скачать альбом целиком", "GetAlbumInArchive", "Home", new {idAlbum = currentAlbum.Id})</p>
+            </div>
+
+            <div class="admin-album-block">
+                <h4>Описание альбома</h4>
+                <p>@currentAlbum.Description</p>
+            </div>
+
+            <div class="admin-album-block">
+                <h4>Песни</h4>
+                @foreach (var song in currentAlbum.Songs)
+                {
+                    var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
+                    <p>
+                        @song.Name
+                    </p>
+                    <p>
+                        <img class="playSong" src="@Url.Content("~/Content/img/play.png")" data-songpath="@songPath" data-albumName="@currentAlbum.Name" data-songName="@song.Name" />
+                        @*<audio controls preload="none">
+                            <source src="@songPath" type="audio/mpeg">
+                            Ваш браузер не поддерживает HTML 5. Вы можете скачать трек.
+                        </audio>*@
+
+                    </p>
+                    <p>
+                        <a href="@songPath">Скачать песню</a>
+                    </p>
+                }
+            </div>
+        </div>
+        <div class="album-footer">
+            @Html.Partial("AlbumFooter", Model.Albums)
+        </div>
+
+    </div>
+</div>

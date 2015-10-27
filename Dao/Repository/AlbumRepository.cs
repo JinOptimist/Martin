@@ -10,6 +10,11 @@ namespace Dao.Repository
     {
         private readonly MartinContext _db = new MartinContext();
 
+        public Album GetRandom()
+        {
+            return _db.Album.First();
+        }
+
         public Album Get(long id)
         {
             return _db.Album.SingleOrDefault(x => x.Id == id);

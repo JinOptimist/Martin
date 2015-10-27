@@ -5,11 +5,13 @@ using System.IO.Compression;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Autofac;
 using Dao.IRepository;
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Zip;
 using Martin.Utility;
+using Martin.ViewModel;
 using FileStandard = System.IO.File;
 
 namespace Martin.Controllers
@@ -29,10 +31,37 @@ namespace Martin.Controllers
             }
         }
 
-        public ActionResult Index()
+        public ActionResult Index(long? albumId)
         {
-            var model = AlbumRepository.GetAll();
+            if (!albumId.HasValue)
+            {
+                albumId = AlbumRepository.GetRandom().Id;
+            }
+
+            var albums = AlbumRepository.GetAll();
+            var model = new AlbumsHomeViewModel
+            {
+                AlbumId = albumId.Value,
+                Albums = albums
+            };
             return View(model);
+        }
+
+        public ActionResult GetOneSlide(long albumId)
+        {
+            var albums = AlbumRepository.GetAll();
+            var model = new AlbumsHomeViewModel
+            {
+                AlbumId = albumId,
+                Albums = albums
+            };
+
+            var viewToString = RenderRazorViewToString("OneSlide", model);
+            return new JsonResult
+            {
+                Data = viewToString, 
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
 
         public ActionResult About()
@@ -64,6 +93,21 @@ namespace Martin.Controllers
             var fileBytes = FileStandard.ReadAllBytes(zipPath);
             var fileName = Path.GetFileName(zipPath);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Zip, fileName);
+        }
+
+        private string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }

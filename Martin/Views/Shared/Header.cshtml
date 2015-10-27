@@ -1,0 +1,24 @@
+﻿<div class="navigation-top">
+    <div class="float-left"><img class="navigation-top-logo" src="~/Content/img/logo_white_150x150.png" /></div>
+    <ul style="float: left;">
+        <li>
+            @Html.ActionLink("Martin S", "Index", "Home")
+        </li>
+    </ul>
+    <p class="player">
+        <audio id="mainMp3Player" controls preload="none">
+            <source id="mainMp3Source" src="" type="audio/mpeg">
+            Ваш браузер не поддерживает HTML 5. Вы можете только скачать треки.
+        </audio>
+        Сейчас играет: <span id="nowPlaying">...</span>
+    </p>
+
+    <ul style="float: right;">
+        <li>
+            @Html.ActionLink("О нас", "About", "Home")
+        </li>
+        <li>
+            @Html.ActionLink("Админка", "Index", "Album")
+        </li>
+    </ul>
+</div>

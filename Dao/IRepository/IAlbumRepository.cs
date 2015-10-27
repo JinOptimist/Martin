@@ -5,6 +5,8 @@ namespace Dao.IRepository
 {
     public interface IAlbumRepository
     {
+        Album GetRandom();
+
         Album Get(long id);
 
         List<Album> GetAll();

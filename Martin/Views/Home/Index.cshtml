@@ -1,9 +1,9 @@
 ﻿@using Martin.Utility
-@model List<Dao.Model.Album>
+@model Martin.ViewModel.AlbumsHomeViewModel
 
 @{
     ViewBag.Title = "Home";
-    Layout = "~/Views/LayoutMaster.cshtml";
+    Layout = "~/Views/FrontMaster.cshtml";
 }
 
 @section Script
@@ -12,55 +12,70 @@
     <script src="~/Scripts/jquery.bxslider.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.content').bxSlider({
-                slideWidth: 1100,
-                minSlides: 1,
-                maxSlides: 1,
-                slideMargin: 10
+            function updateBackgroundImage() {
+                $(".slide").css("background-image", "url(" + $("#albumCover").val() + ")");
+            }
+
+            
+
+
+            function openNewAlbum(obj) {
+                var url = $(obj).data("url");
+
+                $.get(url, function (data) {
+                    //after get response
+
+                    function myFadeOut() {
+                        var div = $(data).hide();
+                        $(this).replaceWith(div);
+                        $('.slide').fadeIn({
+                            duration: 1000,
+                            queue: false
+                        });
+                        updateBackgroundImage();
+                    }
+
+                    $(".slide").fadeOut({
+                        duration: 1000,
+                        complete: myFadeOut,
+                        queue: false
+                    });
+
+                    //$(".slide").fadeOut("slow", function() {
+                    //    var div = $(data).hide();
+                    //    $(this).replaceWith(div);
+                    //    $('.slide').fadeIn("slow");
+                    //    updateBackgroundImage();
+                    //});
+                });
+
+                return false;
+            }
+
+            updateBackgroundImage();
+
+            function playSong(obj) {
+                var songPath = $(obj).data("songpath");
+                var albumName = $(obj).data("albumname");
+                var songName = $(obj).data("songname");
+
+                $("#mainMp3Source").attr("src", songPath);
+                $("#nowPlaying").text(albumName + " - " + songName);
+
+                var music = $("#mainMp3Player")[0];
+                music.load();
+                music.play();
+            }
+
+            $(document).on("click", ".playSong", function () {
+                playSong(this);
+            });
+
+            $(document).on("click", ".getAlbumLink", function () {
+                openNewAlbum(this);
             });
         });
     </script>
 }
 
-@if (Model != null)
-{
-    <div class="content clear-left">
-        @foreach (var album in Model)
-        {
-            <div class="slide">
-                <h1 class="album-name">@album.Name</h1>
-                <div class="admin-album-block">
-                    <img class="album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" />
-                </div>
-
-                <div class="admin-album-block">
-                    <p>@Html.ActionLink("Скачать альбом целиком", "GetAlbumInArchive", new { idAlbum = album.Id })</p>
-                </div>
-                
-
-                <div class="admin-album-block">
-                    <h4>Описание альбома</h4>
-                    <p>@album.Description</p>
-                </div>
-
-                <div class="admin-album-block">
-                    <h4>Песни</h4>
-                    @foreach (var song in album.Songs)
-                    {
-                        var songPath = @Url.Content("~/" + FileHelper.PathToSong(album.Name, song.Mp3FileName));
-                        <p>
-                            @song.Name
-                        </p>
-                        <p>
-                            <audio controls preload="none">
-                                <source src="@songPath" type="audio/mpeg">
-                                Ваш браузер не поддерживает HTML 5. Вы можете скачать трек.
-                            </audio>
-                            <a href="@songPath">Скачать песню</a>
-                        </p>
-                    }
-                </div>
-            </div>
-        }
-    </div>
-}
+@Html.Partial("OneSlide", Model)

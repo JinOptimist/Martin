@@ -10,12 +10,26 @@
 </head>
 <body>
 <div>
-    <h3>Admin</h3>
-    @Html.ActionLink("Front", "Index", "Home")
-    ||| @Html.ActionLink("List Album", "Index", "Album")
-    ||| @Html.ActionLink("Add Album", "Add", "Album")
-    ||| @Html.ActionLink("Add Song", "AddSong", "Album")
-    @RenderBody()
+    <div class="navigation-top">
+        <div class="float-left"><img class="navigation-top-logo" src="~/Content/img/logo_white_150x150.png" /></div>
+        <ul style="float: right;">
+            <li>
+                @Html.ActionLink("Front", "Index", "Home")
+            </li>
+            <li>
+                @Html.ActionLink("List Album", "Index", "Album")
+            </li>
+            <li>
+                @Html.ActionLink("Add Album", "Add", "Album")
+            </li>
+            <li>
+                @Html.ActionLink("Add Song", "AddSong", "Album")
+            </li>
+        </ul>
+    </div>
+    <div style="float: left; width: 100%;">
+        @RenderBody()
+    </div>
 </div>
 </body>
 </html>

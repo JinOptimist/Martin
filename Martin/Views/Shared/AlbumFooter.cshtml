@@ -1,0 +1,16 @@
+﻿@model List<Dao.Model.Album>
+
+@*height 50px*@
+
+@if (Model != null)
+{
+    @*<a href="">Назад</a>
+    <a href="">Вперёд</a>*@
+    foreach (var album in Model)
+    {
+        var url = Url.Action("GetOneSlide", "Home");
+        <div style="height: 80px; float: left; margin: 10px;">
+            <a class="getAlbumLink" data-url="@(string.Format("{0}?albumId={1}", url, album.Id))"><img class="album-cover-small" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" /></a>
+        </div>
+    }
+}
