@@ -18,9 +18,8 @@ body, div, h3 {
     z-index: 50;
 }
 
-.navigation-top-logo {
-    height: 50px;
-    float: left;
+.navigation-top ul {
+    padding: 0;
 }
 
 .navigation-top li{
@@ -33,6 +32,19 @@ body, div, h3 {
     font-size: 22px;
     text-transform: uppercase;
     color: white;
+    text-decoration: none;
+}
+
+.navigation-top a:hover {
+    color: tomato;
+    text-decoration: underline;
+}
+
+.navigation-top-logo {
+    height: 40px;
+    float: left;
+    margin: 5px;
+    margin-left: 25px;
 }
 
 .player{

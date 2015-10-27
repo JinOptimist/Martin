@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Autofac;
 using Dao.IRepository;
+using Dao.Model;
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Zip;
 using Martin.Utility;
@@ -23,11 +24,14 @@ namespace Martin.Controllers
 
         public IAlbumRepository AlbumRepository { get; set; }
 
+        public IStaticContentRepository StaticContentRepository { get; set; }
+
         public HomeController()
         {
             using (var scope = StaticContainer.Container.BeginLifetimeScope())
             {
                 AlbumRepository = scope.Resolve<IAlbumRepository>();
+                StaticContentRepository = scope.Resolve<IStaticContentRepository>();
             }
         }
 
@@ -66,7 +70,8 @@ namespace Martin.Controllers
 
         public ActionResult About()
         {
-            return View();
+            var model = StaticContentRepository.Get(TypeStaticContent.About);
+            return View(model);
         }
 
         public FileResult GetAlbumInArchive(long idAlbum)

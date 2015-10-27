@@ -1,11 +1,12 @@
-﻿@model string
+﻿@model Dao.Model.StaticContent
 
 @{
     ViewBag.Title = "О нас";
     Layout = "~/Views/FrontMaster.cshtml";
 }
 
-<h2>Заголово: О нас</h2>
+<h2>Заголово: @Model.Title</h2>
 <div>
     Тело
+    @Html.Raw(Model.Body)
 </div>

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="IRepository\ISongRepository.cs" />
     <Compile Include="IRepository\IAlbumRepository.cs" />
+    <Compile Include="IRepository\IStaticContentRepository.cs" />
     <Compile Include="Migrations\201510211321122_InitDB.cs" />
     <Compile Include="Migrations\201510211321122_InitDB.Designer.cs">
       <DependentUpon>201510211321122_InitDB.cs</DependentUpon>
@@ -62,15 +63,21 @@
     <Compile Include="Migrations\201510211500443_AddFileNameForCoverAndMp3.Designer.cs">
       <DependentUpon>201510211500443_AddFileNameForCoverAndMp3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510271453031_AddStaticContent.cs" />
+    <Compile Include="Migrations\201510271453031_AddStaticContent.Designer.cs">
+      <DependentUpon>201510271453031_AddStaticContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\Album.cs" />
+    <Compile Include="Model\StaticContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\SongRepository.cs" />
     <Compile Include="Repository\AlbumRepository.cs" />
     <Compile Include="MartinConfiguration.cs" />
     <Compile Include="MartinContext.cs" />
     <Compile Include="MartinInitializer.cs" />
+    <Compile Include="Repository\StaticContentRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510211500443_AddFileNameForCoverAndMp3.resx">
       <DependentUpon>201510211500443_AddFileNameForCoverAndMp3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510271453031_AddStaticContent.resx">
+      <DependentUpon>201510271453031_AddStaticContent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

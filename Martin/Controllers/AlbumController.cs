@@ -19,6 +19,7 @@ namespace Martin.Controllers
 
         public IAlbumRepository AlbumRepository { get; set; }
         public ISongRepository SongRepository { get; set; }
+        public IStaticContentRepository StaticContentRepository { get; set; }
 
         public AlbumController()
         {
@@ -26,6 +27,7 @@ namespace Martin.Controllers
             {
                 AlbumRepository = scope.Resolve<IAlbumRepository>();
                 SongRepository = scope.Resolve<ISongRepository>();
+                StaticContentRepository = scope.Resolve<IStaticContentRepository>();
             }
         }
 
@@ -69,6 +71,21 @@ namespace Martin.Controllers
             SongRepository.Save(song);
             return RedirectToAction("Index");
         }
+
+        public ActionResult AddStaticContent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddStaticContent(StaticContent staticContent)
+        {
+            StaticContentRepository.Save(staticContent);
+
+            return View();
+        }
+
 
         private string SaveAttach(string folder)
         {

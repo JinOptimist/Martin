@@ -15,6 +15,8 @@ namespace Dao
 
         public DbSet<Song> Song { get; set; }
 
+        public DbSet<StaticContent> StaticContent { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

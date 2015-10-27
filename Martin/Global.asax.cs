@@ -28,11 +28,15 @@ namespace Martin
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             var builder = new ContainerBuilder();
+
             builder.RegisterType<AlbumRepository>();
             builder.Register<IAlbumRepository>(x => x.Resolve<AlbumRepository>());
 
             builder.RegisterType<SongRepository>();
             builder.Register<ISongRepository>(x => x.Resolve<SongRepository>());
+
+            builder.RegisterType<StaticContentRepository>();
+            builder.Register<IStaticContentRepository>(x => x.Resolve<StaticContentRepository>());
 
             StaticContainer.Container = builder.Build();
 
