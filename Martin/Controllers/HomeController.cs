@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Security;
 using Autofac;
 using Dao.IRepository;
 using Dao.Model;
@@ -19,9 +20,6 @@ namespace Martin.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
         public IAlbumRepository AlbumRepository { get; set; }
 
         public IStaticContentRepository StaticContentRepository { get; set; }
@@ -72,6 +70,18 @@ namespace Martin.Controllers
         {
             var model = StaticContentRepository.Get(TypeStaticContent.About);
             return View(model);
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string result)
+        {
+            FormsAuthentication.SetAuthCookie(result, false);
+            return RedirectToAction("Index", "Album");
         }
 
         public FileResult GetAlbumInArchive(long idAlbum)

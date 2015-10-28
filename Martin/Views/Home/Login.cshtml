@@ -1,0 +1,47 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/FrontMaster.cshtml";
+}
+
+@section Script
+{
+    <script>
+        $(document).ready(function () {
+            var a = "Black-Jin";
+            $("#login").submit(function () {
+                var name = $("#Name").val();
+                var color = $("#Color").val();
+                var sex = $("#Sex").val();
+                var hair = $("#Hair").val();
+                var result = name + color + sex + hair;
+                $("#result").val(result);
+            });
+        });
+    </script>
+}
+
+<h2>Заход</h2>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "login" }))
+{
+    @Html.Hidden("result")
+    <p>
+        Имя: @Html.TextBox("Name", "Вениамин")
+    </p>
+
+    <p>
+        Цвет глаз: @Html.TextBox("Color", "Чёрный")
+    </p>
+
+    <p>
+        Пол: @Html.TextBox("Sex", "Присутсвует")
+    </p>
+    <p>
+        Длина волос: @Html.TextBox("Hair", "Чёрные")
+    </p>
+    <p>
+        <input type="submit" value="Сохранить" />
+    </p>
+}

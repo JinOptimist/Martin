@@ -485,6 +485,7 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\OneSlide.cshtml" />
     <Content Include="Views\Album\AddStaticContent.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

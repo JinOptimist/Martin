@@ -12,6 +12,7 @@ using Martin.ViewModel;
 
 namespace Martin.Controllers
 {
+    [Authorize(Users = "Black-Jin")]
     public class AlbumController : Controller
     {
         //
@@ -85,7 +86,6 @@ namespace Martin.Controllers
 
             return View();
         }
-
 
         private string SaveAttach(string folder)
         {
