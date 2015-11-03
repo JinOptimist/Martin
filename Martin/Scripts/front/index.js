@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $.ajaxSetup({ cache: false });
     function updateBackgroundImage() {
-        $(".slide").css("background-image", "url(" + $("#albumCover").val() + ")");
+        $(".slide").css("background-image", "url(" + $("#albumBgImg").val() + ")");
     }
 
     function openNewAlbum(obj) {

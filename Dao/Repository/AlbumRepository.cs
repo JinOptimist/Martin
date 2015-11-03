@@ -20,6 +20,12 @@ namespace Dao.Repository
             return _db.Album.SingleOrDefault(x => x.Id == id);
         }
 
+        public void Delete(long id)
+        {
+            _db.Album.Remove(Get(id));
+            _db.SaveChanges();
+        }
+
         public List<Album> GetAll()
         {
             return _db.Album.ToList();

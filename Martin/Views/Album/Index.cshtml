@@ -15,6 +15,13 @@
             <div class="admin-album-block clear-left">
                 <img src="@Url.Content("~/Content/cover/" + album.CoverFileName)" width="150" />
             </div>
+            <div class="admin-album-block">
+                @Html.ActionLink("Delete", "Delete", new {id = album.Id})
+                @Html.ActionLink("Edit", "Edit", new { id = album.Id })
+            </div>
+            <div class="admin-album-block" style="color: @album.TextColor">
+                Пример Текста
+            </div>
 
             <div class="admin-album-block">
                 <p>№@album.Id</p>

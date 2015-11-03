@@ -15,9 +15,6 @@ namespace Martin.Controllers
     [Authorize(Users = "Black-Jin")]
     public class AlbumController : Controller
     {
-        //
-        // GET: /Album/
-
         public IAlbumRepository AlbumRepository { get; set; }
         public ISongRepository SongRepository { get; set; }
         public IStaticContentRepository StaticContentRepository { get; set; }
@@ -40,14 +37,38 @@ namespace Martin.Controllers
 
         public ActionResult Add()
         {
-            return View();
+            var model = new Album();
+            return View(model);
         }
+
+        public ActionResult Edit(long id)
+        {
+            var model = AlbumRepository.Get(id);
+            return View("Add", model);
+        }
+
+        public ActionResult Delete(long id)
+        {
+            AlbumRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
 
         [HttpPost]
         public ActionResult Add(Album album)
         {
-            var coverPath = SaveAttach("cover");
-            album.CoverFileName = coverPath;
+            if (!ModelState.IsValid)
+            {
+                return View(album);
+            }
+
+            var coverPath = SaveAttach("cover", Request.Files["Cover"]);
+            var bgForAlbumPath = SaveAttach("cover", Request.Files["BgForAlbum"]);
+            if (!string.IsNullOrEmpty(coverPath))
+                album.CoverFileName = coverPath;
+            if (!string.IsNullOrEmpty(bgForAlbumPath))
+                album.BackgroundFileName = bgForAlbumPath;
+
             AlbumRepository.Save(album);
 
             Directory.CreateDirectory(Path.Combine(Server.MapPath("~/Content/song/"), album.Name));
@@ -65,9 +86,14 @@ namespace Martin.Controllers
         [HttpPost]
         public ActionResult AddSong(SongViewModel songViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(songViewModel);
+            }
+
             var song = songViewModel.CreateSongModel();
             var album = AlbumRepository.Get(song.Album.Id);
-            var songName = SaveAttach("song/" + album.Name);
+            var songName = SaveAttach("song/" + album.Name, Request.Files["Song"]);
             song.Mp3FileName = songName;
             SongRepository.Save(song);
             return RedirectToAction("Index");
@@ -87,21 +113,15 @@ namespace Martin.Controllers
             return View();
         }
 
-        private string SaveAttach(string folder)
+        private string SaveAttach(string folder, HttpPostedFileBase file)
         {
-            if (Request.Files.Count > 0)
-            {
-                var file = Request.Files[0];
-                if (file != null && file.ContentLength > 0)
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/"), folder, fileName);
-                    file.SaveAs(path);
-                    return fileName;
-                }
-            }
+            if (file == null || file.ContentLength <= 0)
+                return string.Empty;
 
-            return string.Empty;
+            var fileName = Path.GetFileName(file.FileName);
+            var path = Path.Combine(Server.MapPath("~/Content/"), folder, fileName);
+            file.SaveAs(path);
+            return fileName;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Dao.IRepository
 
         Album Get(long id);
 
+        void Delete(long id);
+
         List<Album> GetAll();
 
         void Save(Album album);

@@ -18,5 +18,11 @@ namespace Martin.Utility
             var path = Path.Combine("Content", "song", albumName, mp3FileName);
             return path;
         }
+
+        public static string PathToBgForAlbum(string albumName, string bgFileName)
+        {
+            var path = Path.Combine("Content", "cover", albumName, bgFileName);
+            return path;
+        }
     }
 }

@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201510271453031_AddStaticContent.Designer.cs">
       <DependentUpon>201510271453031_AddStaticContent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511021619066_AddColorAndBgForAlbum.cs" />
+    <Compile Include="Migrations\201511021619066_AddColorAndBgForAlbum.Designer.cs">
+      <DependentUpon>201511021619066_AddColorAndBgForAlbum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\Album.cs" />
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510271453031_AddStaticContent.resx">
       <DependentUpon>201510271453031_AddStaticContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511021619066_AddColorAndBgForAlbum.resx">
+      <DependentUpon>201511021619066_AddColorAndBgForAlbum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,20 +5,64 @@
     Layout = "~/Views/AdminMaster.cshtml";
 }
 
+@section Script
+{
+    <script>
+        $(document).ready(function () {
+            $("#TextColor").change(function () {
+                var textColor = $("#TextColor").val();
+                $("#TextColor").attr("Value", textColor);
+            });
+
+            $("#Cover").change(function () {
+                var cover = $("#Cover").val();
+                $("#CoverFileName").val(cover);
+            });
+
+            $("#BgForAlbum").change(function () {
+                var bgForAlbum = $("#BgForAlbum").val();
+                $("#BackgroundFileName").val(bgForAlbum);
+            });
+        });
+    </script>
+}
+
 <h2>Добавить Альбом</h2>
 
 @using (Html.BeginForm("Add", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <p>
+        @Html.HiddenFor(x => x.Id)
+        @Html.ValidationMessageFor(x => x.Name)
         Имя альбома: @Html.TextBoxFor(x => x.Name)
+    </p>
+    <p>
+        @Html.ValidationMessageFor(x => x.Description)
     </p>
     <p>
         Описание: @Html.TextBoxFor(x => x.Description)
     </p>
     <p>
-        Обложка: <input type="file" name="Cover"/>
+        @Html.ValidationMessageFor(x => x.CoverFileName)
     </p>
     <p>
-        <input type="submit" value="Сохранить"/>
+        Обложка альбома: @Html.TextBoxFor(x => x.CoverFileName, new {@readonly = "readonly"}) 
+        <input type="file" name="Cover" id="Cover" />
+    </p>
+    <p>
+        @Html.ValidationMessageFor(x => x.BackgroundFileName)
+    </p>
+    <p>
+        Картинка для фона:@Html.TextBoxFor(x => x.BackgroundFileName, new {@readonly = "readonly"}) 
+        <input type="file" name="BgForAlbum" id="BgForAlbum" />
+    </p>
+    <p>
+        @Html.ValidationMessageFor(x => x.TextColor)
+    </p>
+    <p>
+        Цвет текста: <input type="Color" id="TextColor" name="TextColor" value="@Model.TextColor" />
+    </p>
+    <p>
+        <input type="submit" value="Сохранить" />
     </p>
 }
