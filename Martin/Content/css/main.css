@@ -53,6 +53,16 @@ body, div, h3 {
     float: left;
 }
 
+.playSong {
+    width: 20px;
+    height: 20px;
+}
+
+.downloadSong {
+    width: 20px;
+    height: 20px;
+}
+
 .renderBody {
     width: 100%; 
     height: 100%;
