@@ -7,42 +7,54 @@
 
 <div class="slide">
     <input type="hidden" id="albumId" value="@currentAlbum.Id" />
+    @{
+        var cuteUrl = Url.Action("GetSlideByName", "Home", new { albumName = currentAlbum.Name, albumId = currentAlbum.Id });
+        if (!string.IsNullOrEmpty(cuteUrl))
+        {
+            cuteUrl = cuteUrl.Replace("%20", "-");
+        }
+    }
+    <input type="hidden" id="albumCuteUrl" value="@cuteUrl" />
     <input type="hidden" id="albumBgImg" value="@Url.Content("~/Content/cover/" + currentAlbum.BackgroundFileName)" />
     <div class="slide-center">
         <div class="album-content" style="color: @currentAlbum.TextColor">
-            <h1 class="album-name">
-                @currentAlbum.Name
-            <a href="@Url.Action("GetAlbumInArchive", "Home", new {idAlbum = currentAlbum.Id})">
-                <canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor">
-                    @*<a href="@Url.Action("GetAlbumInArchive", "Home", new {idAlbum = currentAlbum.Id})">Скачать альбом целиком</a>*@
-                </canvas>
-            </a>
-        </h1>
+            <div class="album-content" style="color: @currentAlbum.TextColor">
+                <h1 class="album-name">
+                    @currentAlbum.Name
+                    <a href="@Url.Action("GetAlbumInArchive", "Home", new {idAlbum = currentAlbum.Id})">
+                        <canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor"></canvas>
+                    </a>
+                </h1>
 
-        <div class="admin-album-block">
-            <img class="album-cover" src="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)" />
-        </div>
+                <div class="front-album-block">
+                    <img class="album-cover" src="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)" />
+                </div>
 
-        @*<div class="admin-album-block">
-            <h4>Описание альбома</h4>
-            <p>@currentAlbum.Description</p>
-        </div>*@
+                @if (!string.IsNullOrWhiteSpace(currentAlbum.Description))
+                {
+                    <div class="front-album-block front-album-desc">
+                        <h4>Описание альбома</h4>
+                        <p>@currentAlbum.Description</p>
+                    </div>
+                }
 
-        <div class="admin-album-block">
-            @*<h4>Песни</h4>*@
-            @foreach (var song in currentAlbum.Songs)
-            {
-                var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
-                <p>
-                    <canvas class="playSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name">@*<img class="playSong" src="@Url.Content("~/Content/img/play.png")" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name" />*@</canvas>
-                    <a href="@songPath"><canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
-                    @song.Name
-                </p>
-            }
+                <div class="front-album-block">
+                    <h4>Песни</h4>
+                    @foreach (var song in currentAlbum.Songs)
+                    {
+                        var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
+                        <p>
+                            <canvas class="playSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name">@*<img class="playSong" src="@Url.Content("~/Content/img/play.png")" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name" />*@</canvas>
+                            <a href="@songPath"><canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
+                            @song.Name
+                        </p>
+                    }
+                </div>
+            </div>
+            <div class="album-footer">
+                @Html.Partial("AlbumFooter", Model.Albums)
+            </div>
         </div>
     </div>
-    <div class="album-footer">
-        @Html.Partial("AlbumFooter", Model.Albums)
-    </div>
 </div>
-</div>
+

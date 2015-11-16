@@ -151,9 +151,14 @@
     <Content Include="Content\img\bx_loader.gif" />
     <Content Include="Content\img\controls.png" />
     <Content Include="Content\img\dark_wall.png" />
+    <Content Include="Content\img\edit.png" />
     <Content Include="Content\img\logo_white_150x150.png" />
     <Content Include="Content\img\play.gif" />
     <Content Include="Content\img\play.png" />
+    <Content Include="Content\img\remove.png" />
+    <Content Include="Content\img\twitter.png" />
+    <Content Include="Content\img\vkontakte.png" />
+    <Content Include="Content\img\youtube.png" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\live.pubxml" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />

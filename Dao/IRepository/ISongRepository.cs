@@ -7,6 +7,8 @@ namespace Dao.IRepository
     {
         Song Get(long id);
 
+        void Delete(long id);
+
         List<Song> GetAllForAlbum(long albumId);
 
         List<Song> GetAll();

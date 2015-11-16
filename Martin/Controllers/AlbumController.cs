@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.Security;
 using Autofac;
 using Dao.IRepository;
 using Dao.Model;
-using Dao.Repository;
 using Martin.ViewModel;
 
 namespace Martin.Controllers
@@ -86,16 +87,31 @@ namespace Martin.Controllers
         [HttpPost]
         public ActionResult AddSong(SongViewModel songViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(songViewModel);
-            }
-
             var song = songViewModel.CreateSongModel();
             var album = AlbumRepository.Get(song.Album.Id);
-            var songName = SaveAttach("song/" + album.Name, Request.Files["Song"]);
+            
+            var folder = Path.Combine("song", album.Name);
+            var songName = SaveAttach(folder, Request.Files["Song"]);
+            
+            //var path = Path.Combine(Server.MapPath("~/Content/"), folder, songName);
+            //var tagFile = TagLib.File.Create(path);
+            //tagFile.Tag.Album = album.Name;
+            //tagFile.Tag.Genres = new[] { "Indie" };
+            //tagFile.Tag.AlbumArtists = new[] { "Martin S." };
+            //tagFile.Tag.Title = songName;
+            //tagFile.Tag.Lyrics = song.Lyrics;
+            //IPicture a = new AttachedPictureFrame();
+            //a.Data = new ByteVector();
+            //tagFile.Tag.Pictures = new IPicture[];
+
             song.Mp3FileName = songName;
             SongRepository.Save(song);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteSong(long id)
+        {
+            SongRepository.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -113,6 +129,13 @@ namespace Martin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Exit()
+        {
+            FormsAuthentication.SetAuthCookie("Fake", false);
+            return RedirectToAction("Index", "Home");
+        }
+
         private string SaveAttach(string folder, HttpPostedFileBase file)
         {
             if (file == null || file.ContentLength <= 0)
@@ -121,6 +144,7 @@ namespace Martin.Controllers
             var fileName = Path.GetFileName(file.FileName);
             var path = Path.Combine(Server.MapPath("~/Content/"), folder, fileName);
             file.SaveAs(path);
+            
             return fileName;
         }
     }

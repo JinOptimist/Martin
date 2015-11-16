@@ -46,7 +46,12 @@ namespace Martin.Controllers
                 AlbumId = albumId.Value,
                 Albums = albums
             };
-            return View(model);
+            return View("Index", model);
+        }
+
+        public ActionResult GetSlideByName(string albumName, long albumId)
+        {
+            return Index(albumId);
         }
 
         public ActionResult GetOneSlide(long albumId)
@@ -61,7 +66,7 @@ namespace Martin.Controllers
             var viewToString = RenderRazorViewToString("OneSlide", model);
             return new JsonResult
             {
-                Data = viewToString, 
+                Data = viewToString,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

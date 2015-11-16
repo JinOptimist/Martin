@@ -5,6 +5,24 @@
     Layout = "~/Views/AdminMaster.cshtml";
 }
 
+@section Script
+{
+    <script>
+        $(document).ready(function () {
+            $(".remove").click(function () {
+                var img = $(this);
+                var type = img.data("type");
+                var name = img.data("name");
+                if (confirm("Вы хотите удалить " + type + " под названием " + name + "?")) {
+                    return true;
+                }
+                return false;
+            });
+        });
+    </script>
+
+}
+
 <h2>Album list</h2>
 
 @if (Model != null)
@@ -13,29 +31,34 @@
     {
         <div>
             <div class="admin-album-block clear-left">
-                <img src="@Url.Content("~/Content/cover/" + album.CoverFileName)" width="150" />
-            </div>
-            <div class="admin-album-block">
-                @Html.ActionLink("Delete", "Delete", new {id = album.Id})
-                @Html.ActionLink("Edit", "Edit", new { id = album.Id })
-            </div>
-            <div class="admin-album-block" style="color: @album.TextColor">
-                Пример Текста
-            </div>
+                <div>
+                    <!--<p>№@album.Id</p>-->
+                    <h1 style="color: @album.TextColor; margin-top: 0;">
+                        @album.Name
+                        <a href="@Url.Action("Delete", new {id = album.Id})"><img class="remove" data-type="альбом" data-name="@album.Name" src="@Url.Content("~/Content/img/remove.png")"/></a>
+                        <a href="@Url.Action("Edit", new {id = album.Id})"><img class="edit" src="@Url.Content("~/Content/img/edit.png")"/></a>
+                    </h1>
 
-            <div class="admin-album-block">
-                <p>№@album.Id</p>
-                <p>Name @album.Name</p>
-                <p>Description @album.Description</p>
+                </div>
+                <img class="admin-album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)"/>
+                <div style="color: @album.TextColor">
+                    @album.Description
+                </div>
             </div>
-
             <div class="admin-album-block">
-                <p>Songs</p>
+                <p>Песни</p>
                 @foreach (var song in album.Songs)
                 {
-                    <p><a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a></p>
+                    <p>
+                        <a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a>
+                        <a href="@Url.Action("DeleteSong", new {id = song.Id})"><img class="remove" data-type="песню" data-name="@song.Name" src="@Url.Content("~/Content/img/remove.png")" /></a>
+                    </p>
                 }
             </div>
         </div>
+        if (!album.Equals(Model.Last()))
+        {
+            <hr/>
+        }
     }
 }

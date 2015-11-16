@@ -15,8 +15,15 @@ namespace Martin
 
             routes.MapRoute(
                 name: "BlackDoor",
-                url: "BlackDoor",
+                url: "b",
                 defaults: new { controller = "Home", action = "Login" }
+            );
+
+            routes.MapRoute(
+                name: "FrontAlbum",
+                url: "{albumName}/{albumId}",
+                defaults: new { controller = "Home", action = "GetSlideByName"},
+                constraints: new RouteValueDictionary { { "albumId", @"\d{1,6}" } }
             );
 
             routes.MapRoute(

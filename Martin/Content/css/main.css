@@ -1,5 +1,13 @@
 ﻿html,body { height: 100%; }
 
+h1, h2 {
+    margin-top: 50px;
+}
+
+hr {
+    width: 99%;
+}
+
 body {
     background-color: gray;
 }
@@ -29,7 +37,7 @@ body, div, h3 {
 
 .navigation-top a {
     font-family: 'sansation' !important;
-    font-size: 22px;
+    font-size: 30px;
     text-transform: uppercase;
     color: white;
     text-decoration: none;
@@ -94,13 +102,10 @@ body, div, h3 {
     width: 100%;
     text-align: center;
     margin-top: 50px;
-    color: white;
 }
 
 .slide {
     height: 100%;
-    /*background-color: gray;*/
-    
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
@@ -127,9 +132,34 @@ body, div, h3 {
     float: left;
     margin: 10px;
     /*background-color: antiquewhite;*/
-    /*width: 300px;*/
+    width: 300px;
 }
 
 .field-validation-error {
     color: red;
+}
+
+.remove {
+    width: 15px;
+}
+
+.edit{
+    width: 15px;
+}
+
+.front-album-block {
+    float: left;
+    margin: 10px;
+}
+
+.admin-album-cover {
+    width: 300px;
+}
+
+.front-album-desc {
+    width: 450px;
+}
+
+.social {
+    height: 30px;
 }

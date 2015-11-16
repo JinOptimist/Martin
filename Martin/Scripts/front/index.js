@@ -72,6 +72,9 @@
         updateBackgroundImage();
         drawPlayByClass("playSong");
         drawDownloadByClass("downloadSong");
+
+        var cuteUrl = $("#albumCuteUrl").val();
+        window.history.pushState("Smile ^_^", "Title", cuteUrl);
     }
 
     function openNewAlbum(obj) {
