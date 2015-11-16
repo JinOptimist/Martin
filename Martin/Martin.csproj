@@ -160,6 +160,7 @@
     <Content Include="Content\img\vkontakte.png" />
     <Content Include="Content\img\youtube.png" />
     <Content Include="Global.asax" />
+    <Content Include="Content\font\superPuperFont.ttf" />
     <None Include="Properties\PublishProfiles\live.pubxml" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />

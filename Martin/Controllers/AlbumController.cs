@@ -115,6 +115,11 @@ namespace Martin.Controllers
             return RedirectToAction("Index");
         }
 
+        //public ActionResult StaticContent()
+        //{
+        //    return View();
+        //}
+
         public ActionResult AddStaticContent()
         {
             return View();

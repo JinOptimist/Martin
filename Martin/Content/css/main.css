@@ -1,4 +1,12 @@
-﻿html,body { height: 100%; }
+﻿@font-face {
+    font-family: superPuperFont; /* Гарнитура шрифта */
+    src: url(../font/superPuperFont.ttf); /* Путь к файлу со шрифтом */
+}
+
+html,body {
+    height: 100%;
+    font-family: superPuperFont;
+}
 
 h1, h2 {
     margin-top: 50px;
