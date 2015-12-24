@@ -14,22 +14,25 @@
         <div class="float-left"><img class="navigation-top-logo" src="~/Content/img/logo_white_150x150.png" /></div>
         <ul style="float: right;">
             <li>
-                @Html.ActionLink("На сайт", "Index", "Home")
+                @Html.ActionLink("Go to Front", "Index", "Home")
             </li>
             <li>
-                @Html.ActionLink("Альбомы", "Index", "Album")
+                @Html.ActionLink("All Album", "Index", "Album")
             </li>
             <li>
-                @Html.ActionLink("Добавить Альбом", "Add", "Album")
+                @Html.ActionLink("Add Album", "Add", "Album")
             </li>
             <li>
-                @Html.ActionLink("Добавить Песню", "AddSong", "Album")
+                @Html.ActionLink("Add Song", "AddSong", "Album")
             </li>
             <li>
-                @Html.ActionLink("Выйти", "Exit", "Album")
+                @Html.ActionLink("Font", "SaveNewFont", "Album")
             </li>
             <li>
-                @Html.ActionLink("О нас", "AddStaticContent", "Album")
+                @Html.ActionLink("Static", "AddStaticContent", "Album")
+            </li>
+            <li>
+                @Html.ActionLink("Exit", "Exit", "Album")
             </li>
         </ul>
     </div>

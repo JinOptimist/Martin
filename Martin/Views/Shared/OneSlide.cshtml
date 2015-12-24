@@ -6,16 +6,16 @@
 }
 
 <div class="slide">
-    <input type="hidden" id="albumId" value="@currentAlbum.Id" />
     @{
-        var cuteUrl = Url.Action("GetSlideByName", "Home", new { albumName = currentAlbum.Name, albumId = currentAlbum.Id });
+        var cuteUrl = Url.Action("GetSlideByName", "Home", new {albumName = currentAlbum.Name, albumId = currentAlbum.Id});
         if (!string.IsNullOrEmpty(cuteUrl))
         {
             cuteUrl = cuteUrl.Replace("%20", "-");
         }
     }
-    <input type="hidden" id="albumCuteUrl" value="@cuteUrl" />
-    <input type="hidden" id="albumBgImg" value="@Url.Content("~/Content/cover/" + currentAlbum.BackgroundFileName)" />
+    <input type="hidden" id="albumId" value="@currentAlbum.Id"/>
+    <input type="hidden" id="albumCuteUrl" value="@cuteUrl"/>
+    <input type="hidden" id="albumBgImg" value="@Url.Content("~/Content/cover/" + currentAlbum.BackgroundFileName)"/>
     <div class="slide-center">
         <div class="album-content" style="color: @currentAlbum.TextColor">
             <div class="album-content" style="color: @currentAlbum.TextColor">
@@ -27,7 +27,7 @@
                 </h1>
 
                 <div class="front-album-block">
-                    <img class="album-cover" src="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)" />
+                    <img class="album-cover" src="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)"/>
                 </div>
 
                 @if (!string.IsNullOrWhiteSpace(currentAlbum.Description))
@@ -45,7 +45,7 @@
                         var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
                         <p>
                             <canvas class="playSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name">@*<img class="playSong" src="@Url.Content("~/Content/img/play.png")" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name" />*@</canvas>
-                            <a href="@songPath"><canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
+                            <a href="@Url.Action("GetSongMp3", "Home", new {songId = song.Id})"><canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
                             @song.Name
                         </p>
                     }

@@ -79,32 +79,16 @@
 
     function openNewAlbum(obj) {
         var url = $(obj).data("url");
+        $('.slide').hide(1000);
 
         $.get(url, function (data) {
-            //after get response
-
-            function myFadeOut() {
+            //done
+            $(".slide").fadeOut(1000, function() {
                 var div = $(data).hide();
                 $(this).replaceWith(div);
-                $('.slide').fadeIn({
-                    duration: 1000,
-                    queue: false
-                });
+                $('.slide').fadeIn(1000);
                 updateAll();
-            }
-
-            $(".slide").fadeOut({
-                duration: 1000,
-                complete: myFadeOut,
-                queue: false
             });
-
-            //$(".slide").fadeOut("slow", function() {
-            //    var div = $(data).hide();
-            //    $(this).replaceWith(div);
-            //    $('.slide').fadeIn("slow");
-            //    updateBackgroundImage();
-            //});
         });
 
         return false;

@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201511021619066_AddColorAndBgForAlbum.Designer.cs">
       <DependentUpon>201511021619066_AddColorAndBgForAlbum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512240812256_Add order for Album.cs" />
+    <Compile Include="Migrations\201512240812256_Add order for Album.Designer.cs">
+      <DependentUpon>201512240812256_Add order for Album.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\Album.cs" />
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511021619066_AddColorAndBgForAlbum.resx">
       <DependentUpon>201511021619066_AddColorAndBgForAlbum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512240812256_Add order for Album.resx">
+      <DependentUpon>201512240812256_Add order for Album.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

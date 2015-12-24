@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
+﻿using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using System.Web.Security;
 using Autofac;
 using Dao.IRepository;
 using Dao.Model;
-using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Zip;
 using Martin.Utility;
 using Martin.ViewModel;
@@ -21,6 +15,7 @@ namespace Martin.Controllers
     public class HomeController : Controller
     {
         public IAlbumRepository AlbumRepository { get; set; }
+        public ISongRepository SongRepository{ get; set; }
 
         public IStaticContentRepository StaticContentRepository { get; set; }
 
@@ -29,6 +24,7 @@ namespace Martin.Controllers
             using (var scope = StaticContainer.Container.BeginLifetimeScope())
             {
                 AlbumRepository = scope.Resolve<IAlbumRepository>();
+                SongRepository = scope.Resolve<ISongRepository>();
                 StaticContentRepository = scope.Resolve<IStaticContentRepository>();
             }
         }
@@ -54,7 +50,7 @@ namespace Martin.Controllers
             return Index(albumId);
         }
 
-        public ActionResult GetOneSlide(long albumId)
+        public JsonResult GetOneSlide(long albumId)
         {
             var albums = AlbumRepository.GetAll();
             var model = new AlbumsHomeViewModel
@@ -75,6 +71,12 @@ namespace Martin.Controllers
         {
             var model = StaticContentRepository.Get(TypeStaticContent.About);
             return View(model);
+        }
+
+        public ActionResult Donate()
+        {
+            var model = StaticContentRepository.Get(TypeStaticContent.Donate);
+            return View("About", model);
         }
 
         public ActionResult Login()
@@ -113,6 +115,17 @@ namespace Martin.Controllers
             var fileBytes = FileStandard.ReadAllBytes(zipPath);
             var fileName = Path.GetFileName(zipPath);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Zip, fileName);
+        }
+
+        public FileResult GetSongMp3(long songId)
+        {
+            var song = SongRepository.Get(songId);
+            var localPath = FileHelper.PathToSong(song.Album.Name, song.Mp3FileName);
+            var path = Server.MapPath("~/" + localPath);
+
+            var fileBytes = FileStandard.ReadAllBytes(path);
+            var fileName = Path.GetFileName(path);
+            return File(fileBytes, "audio/mp3", fileName);
         }
 
         private string RenderRazorViewToString(string viewName, object model)

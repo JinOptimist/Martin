@@ -23,6 +23,9 @@ namespace Dao.Model
         [Required]
         public virtual string TextColor { get; set; }
 
+        [Required]
+        public virtual int Order { get; set; }
+
         public virtual List<Song> Songs { get; set; }
     }
 }

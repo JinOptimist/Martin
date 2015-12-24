@@ -6,7 +6,7 @@ using Dao.Model;
 
 namespace Dao.Repository
 {
-    public class StaticContentRepository:IStaticContentRepository
+    public class StaticContentRepository : IStaticContentRepository
     {
         private readonly MartinContext _db = new MartinContext();
 

@@ -110,6 +110,7 @@ body, div, h3 {
     width: 100%;
     text-align: center;
     margin-top: 50px;
+    margin-bottom: 130px;
 }
 
 .slide {
@@ -128,7 +129,7 @@ body, div, h3 {
 }
 
 .album-content {
-    min-height: calc(100vh - 70px - 100px);
+    min-height: calc(100vh - 180px - 100px);
 }
 
 .album-footer {

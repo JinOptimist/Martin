@@ -28,7 +28,7 @@ namespace Dao.Repository
 
         public List<Album> GetAll()
         {
-            return _db.Album.ToList();
+            return _db.Album.OrderBy(x => x.Order).ToList();
         }
 
         public void Save(Album album)

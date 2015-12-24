@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "SaveNewFont";
+    Layout = "~/Views/AdminMaster.cshtml";
+}
+
+<h2>Шрифт</h2>
+<p>
+    Востановить шфрит по умолчанию @Html.ActionLink("Reset", "ResetFont")
+</p>
+@using (Html.BeginForm("SaveNewFont", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("fake", "fake")
+    <p>
+        Шрифт <input type="file" name="font" />
+    </p>
+    <p>
+        <input type="submit" value="Сохранить новый" />
+    </p>
+}
