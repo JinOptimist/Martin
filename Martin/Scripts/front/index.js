@@ -71,7 +71,7 @@
     function updateAll() {
         updateBackgroundImage();
         drawPlayByClass("playSong");
-        drawDownloadByClass("downloadSong");
+        drawDownloadByClass("downloadImg");
 
         var cuteUrl = $("#albumCuteUrl").val();
         window.history.pushState("Smile ^_^", "Title", cuteUrl);

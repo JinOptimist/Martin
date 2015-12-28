@@ -10,7 +10,7 @@ using Martin.ViewModel;
 
 namespace Martin.Controllers
 {
-    [Authorize(Users = "Black-Jin")]
+    [Authorize]
     public class AlbumController : Controller
     {
         public IAlbumRepository AlbumRepository { get; set; }
@@ -93,6 +93,7 @@ namespace Martin.Controllers
         public ActionResult Delete(long id)
         {
             AlbumRepository.Delete(id);
+            AlbumRepository.Reorder();
             return RedirectToAction("Index");
         }
 
@@ -179,14 +180,6 @@ namespace Martin.Controllers
             StaticContentRepository.Save(staticContent);
 
             return View();
-        }
-
-        // -------------------- Login --------------------
-
-        public ActionResult Exit()
-        {
-            FormsAuthentication.SetAuthCookie("Fake", false);
-            return RedirectToAction("Index", "Home");
         }
 
         // -------------------- Font Region --------------------

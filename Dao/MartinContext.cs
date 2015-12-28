@@ -17,6 +17,8 @@ namespace Dao
 
         public DbSet<StaticContent> StaticContent { get; set; }
 
+        public DbSet<Artist> Artist { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

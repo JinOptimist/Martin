@@ -6,7 +6,6 @@ namespace Dao.Model
 {
     public class Album
     {
-        
         public virtual long Id { get; set; }
 
         [Required]

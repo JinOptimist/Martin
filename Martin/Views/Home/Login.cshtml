@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model Dao.Model.Artist
 
 @{
     ViewBag.Title = "Login";
@@ -7,7 +7,7 @@
 
 @section Script
 {
-    <script>
+    @*<script>
         $(document).ready(function () {
             var a = "Black-Jin";
             $("#login").submit(function () {
@@ -19,29 +19,20 @@
                 $("#result").val(result);
             });
         });
-    </script>
+    </script>*@
 }
 
 <h2>Заход</h2>
 
-@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "login" }))
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    @Html.Hidden("result")
     <p>
-        Имя: @Html.TextBox("Name", "Black-Jin")
-    </p>
-
-    <p>
-        Цвет глаз: @Html.TextBox("Color", "")
-    </p>
-
-    <p>
-        Пол: @Html.TextBox("Sex", "")
+        Рост: @Html.TextBoxFor(x=>x.Name)
     </p>
     <p>
-        Длина волос: @Html.TextBox("Hair", "")
+        Вес: @Html.PasswordFor(x => x.Password)
     </p>
     <p>
-        <input type="submit" value="Войти" />
+        <input type="submit" value="Попробовать протиснуться" />
     </p>
 }

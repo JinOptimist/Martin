@@ -22,5 +22,7 @@ namespace Dao.IRepository
         void Save(Album album);
 
         int Count();
+
+        void Reorder();
     }
 }

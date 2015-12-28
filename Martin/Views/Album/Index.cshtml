@@ -33,7 +33,7 @@
             <div class="admin-album-block clear-left">
                 <div>
                     <!--<p>№@album.Id</p>-->
-                    <h1 style="color: @album.TextColor; margin-top: 0;">
+                    <h1 style="margin-top: 0;">
                         @album.Order) @album.Name
                         <a href="@Url.Action("Delete", new {id = album.Id})"><img class="admin-icon" data-type="альбом" data-name="@album.Name" src="@Url.Content("~/Content/img/remove.png")" /></a>
                         <a href="@Url.Action("Edit", new {id = album.Id})"><img class="admin-icon" src="@Url.Content("~/Content/img/edit.png")" /></a>
@@ -42,7 +42,10 @@
                     </h1>
                 </div>
                 <img class="admin-album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)"/>
-                <div style="color: @album.TextColor">
+                <div>
+                    Цвет текста: <input type="Color" id="TextColor" name="TextColor" value="@album.TextColor" disabled="disabled"/>
+                </div>
+                <div>
                     @album.Description
                 </div>
             </div>

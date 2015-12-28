@@ -16,7 +16,7 @@ namespace Martin.Controllers
     {
         public IAlbumRepository AlbumRepository { get; set; }
         public ISongRepository SongRepository{ get; set; }
-
+        public IArtistRepository ArtistRepository { get; set; }
         public IStaticContentRepository StaticContentRepository { get; set; }
 
         public HomeController()
@@ -26,9 +26,11 @@ namespace Martin.Controllers
                 AlbumRepository = scope.Resolve<IAlbumRepository>();
                 SongRepository = scope.Resolve<ISongRepository>();
                 StaticContentRepository = scope.Resolve<IStaticContentRepository>();
+                ArtistRepository = scope.Resolve<IArtistRepository>();
             }
         }
 
+        // -------------------- Album  --------------------
         public ActionResult Index(long? albumId)
         {
             if (!albumId.HasValue)
@@ -67,6 +69,8 @@ namespace Martin.Controllers
             };
         }
 
+
+        // -------------------- Static  --------------------
         public ActionResult About()
         {
             var model = StaticContentRepository.Get(TypeStaticContent.About);
@@ -79,18 +83,29 @@ namespace Martin.Controllers
             return View("About", model);
         }
 
+        // -------------------- Login --------------------
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string result)
+        public ActionResult Login(Artist artist)
         {
-            FormsAuthentication.SetAuthCookie(result, false);
+            artist = ArtistRepository.CheckPassword(artist);
+            if (artist == null) return View();
+            
+            FormsAuthentication.SetAuthCookie(artist.Id.ToString(), false);
             return RedirectToAction("Index", "Album");
         }
 
+        public ActionResult Exit()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        // -------------------- Download --------------------
         public FileResult GetAlbumInArchive(long idAlbum)
         {
             var album = AlbumRepository.Get(idAlbum);

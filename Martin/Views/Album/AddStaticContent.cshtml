@@ -9,48 +9,13 @@
 @section Script
 {
     <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")"></script>
-
     <script>
-        var urlGetStaticContent = "@Url.Action("GetStaticContent","Album")";
-        function CkEditorReadonly(ckEditor, readonly) {
-            ckEditor.document.$.body.disabled = readonly;
-            ckEditor.document.$.body.contentEditable = !readonly;
-            ckEditor.document.$.designMode = readonly ? "off" : "on";
-        }
-
-        function loadStaticConttenc() {
-            var typeStaticContent = $("#TypeStaticContent").val();
-            var ckEditor = CKEDITOR.instances["Body"];
-            CkEditorReadonly(ckEditor, true);
-
-            ckEditor.setData("Wait. Loading...");
-
-            var url = urlGetStaticContent + "?type=" + typeStaticContent;
-
-            $.get(url, function (data) {
-                ckEditor.setData(data.body);
-                $("#Title").val(data.title);
-                CkEditorReadonly(ckEditor, false);
-            });
-        }
-
-        $(document).ready(function () {
-            CKEDITOR.replace('Body');
-
-            CKEDITOR.on('instanceReady', function() {
-                 loadStaticConttenc();
-            });
-            
-
-            $("#TypeStaticContent").change(function () {
-                loadStaticConttenc();
-            });
-        });
+        var urlGetStaticContent = "@Url.Action("GetStaticContent", "Album")";
     </script>
+    <script src="@Url.Content("~/Scripts/admin/staticContent.js")"></script>
 }
 
 <h2>Static</h2>
-
 
 @using (Html.BeginForm("AddStaticContent", "Album", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {

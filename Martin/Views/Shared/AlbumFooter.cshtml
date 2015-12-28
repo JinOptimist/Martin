@@ -4,13 +4,19 @@
 
 @if (Model != null)
 {
-    @*<a href="">Назад</a>
-    <a href="">Вперёд</a>*@
+    @*<div class="footer-block">
+        <span class="vertical-helper"></span>
+        <img src="@Url.Content("~/Content/img/left.png")" width="30"/>
+    </div>*@
     foreach (var album in Model)
     {
         var url = Url.Action("GetOneSlide", "Home");
-        <div style="height: 80px; float: left; margin: 10px;">
+        <div class="footer-block">
             <a class="getAlbumLink" data-url="@(string.Format("{0}?albumId={1}", url, album.Id))"><img class="album-cover-small" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" /></a>
         </div>
     }
+    @*<div class="footer-block">
+        <span class="vertical-helper"></span>
+        <img src="@Url.Content("~/Content/img/right.png")" width="30"/>
+    </div>*@
 }

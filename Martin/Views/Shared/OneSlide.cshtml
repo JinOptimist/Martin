@@ -22,7 +22,7 @@
                 <h1 class="album-name">
                     @currentAlbum.Name
                     <a href="@Url.Action("GetAlbumInArchive", "Home", new {idAlbum = currentAlbum.Id})">
-                        <canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor"></canvas>
+                        <canvas class="downloadAlbum downloadImg" data-bgcolor="@currentAlbum.TextColor"></canvas>
                     </a>
                 </h1>
 
@@ -30,22 +30,22 @@
                     <img class="album-cover" src="@Url.Content("~/Content/cover/" + currentAlbum.CoverFileName)"/>
                 </div>
 
-                @if (!string.IsNullOrWhiteSpace(currentAlbum.Description))
+                @*@if (!string.IsNullOrWhiteSpace(currentAlbum.Description))
                 {
                     <div class="front-album-block front-album-desc">
                         <h4>Описание альбома</h4>
                         <p>@currentAlbum.Description</p>
                     </div>
-                }
+                }*@
 
                 <div class="front-album-block">
-                    <h4>Песни</h4>
+                    @*<h4>Песни</h4>*@
                     @foreach (var song in currentAlbum.Songs)
                     {
                         var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
                         <p>
                             <canvas class="playSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name">@*<img class="playSong" src="@Url.Content("~/Content/img/play.png")" data-songpath="@songPath" data-albumname="@currentAlbum.Name" data-songname="@song.Name" />*@</canvas>
-                            <a href="@Url.Action("GetSongMp3", "Home", new {songId = song.Id})"><canvas class="downloadSong" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
+                            <a href="@Url.Action("GetSongMp3", "Home", new {songId = song.Id})"><canvas class="downloadSong downloadImg" data-bgcolor="@currentAlbum.TextColor" data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
                             @song.Name
                         </p>
                     }

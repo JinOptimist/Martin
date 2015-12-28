@@ -38,6 +38,9 @@ namespace Martin
             builder.RegisterType<StaticContentRepository>();
             builder.Register<IStaticContentRepository>(x => x.Resolve<StaticContentRepository>());
 
+            builder.RegisterType<ArtistRepository>();
+            builder.Register<IArtistRepository>(x => x.Resolve<ArtistRepository>());
+
             StaticContainer.Container = builder.Build();
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MartinContext, Configuration>());
