@@ -74,6 +74,9 @@ namespace Martin.Controllers
             if (!string.IsNullOrEmpty(bgForAlbumPath))
                 album.BackgroundFileName = bgForAlbumPath;
 
+            var order = AlbumRepository.Count() + 1;
+            album.Order = order;
+
             AlbumRepository.Save(album);
 
             Directory.CreateDirectory(Path.Combine(Server.MapPath("~/Content/song/"), album.Name));
@@ -90,6 +93,18 @@ namespace Martin.Controllers
         public ActionResult Delete(long id)
         {
             AlbumRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult OrderUp(long id)
+        {
+            AlbumRepository.OrderUp(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult OrderDown(long id)
+        {
+            AlbumRepository.OrderDown(id);
             return RedirectToAction("Index");
         }
 

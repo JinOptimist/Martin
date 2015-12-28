@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/jquery.bxslider.css")">
     <script src="~/Scripts/front/index.js"></script>
 }
-
-<img class="wait" src="@Url.Content("~/Content/img/wait.gif")" style="float: left; z-index: -1; position: absolute; left: 300px; top: 200px;"/>
+<div style="float: left; z-index: -1; position: absolute; left: 300px; top: 200px;">
+    <img class="wait" src="@Url.Content("~/Content/img/wait.gif")" />
+</div>
 
 @Html.Partial("OneSlide", Model)

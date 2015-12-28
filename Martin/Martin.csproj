@@ -151,12 +151,16 @@
     <Content Include="Content\img\bx_loader.gif" />
     <Content Include="Content\img\controls.png" />
     <Content Include="Content\img\dark_wall.png" />
+    <Content Include="Content\img\down.png" />
     <Content Include="Content\img\edit.png" />
+    <Content Include="Content\img\left.png" />
     <Content Include="Content\img\logo_white_150x150.png" />
     <Content Include="Content\img\play.gif" />
     <Content Include="Content\img\play.png" />
     <Content Include="Content\img\remove.png" />
+    <Content Include="Content\img\right.png" />
     <Content Include="Content\img\twitter.png" />
+    <Content Include="Content\img\up.png" />
     <Content Include="Content\img\vkontakte.png" />
     <Content Include="Content\img\wait.gif" />
     <Content Include="Content\img\youtube.png" />

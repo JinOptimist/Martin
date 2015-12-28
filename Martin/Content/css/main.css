@@ -148,12 +148,8 @@ body, div, h3 {
     color: red;
 }
 
-.remove {
-    width: 15px;
-}
-
-.edit{
-    width: 15px;
+.admin-icon {
+    width: 25px;
 }
 
 .front-album-block {
