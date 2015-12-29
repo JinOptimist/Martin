@@ -14,8 +14,6 @@ namespace Martin.ViewModel
 
         public Album Album { get; set; }
 
-        public List<AlbumForListBox> AlbumsList { get; set; }
-
         public Song CreateSongModel()
         {
             var song = new Song
@@ -27,18 +25,5 @@ namespace Martin.ViewModel
             };
             return song;
         }
-    }
-
-    public class AlbumForListBox
-    {
-        public AlbumForListBox(Album album)
-        {
-            Id = album.Id;
-            Name = album.Name;
-        }
-
-        public long Id { get; set; }
-
-        public string Name { get; set; }
     }
 }

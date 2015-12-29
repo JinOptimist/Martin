@@ -6,9 +6,10 @@
     Layout = "~/Views/AdminMaster.cshtml";
 }
 
-<h2>Song Add</h2>
+<h2>Song Add to Album @Model.Album.Name</h2>
 @using (Html.BeginForm("AddSong", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.HiddenFor(x => x.Album.Id)
     <p>
         Название песни: @Html.TextBoxFor(x => x.Name)
     </p>
@@ -18,12 +19,9 @@
     </p>
 
     <p>
-        Альбом @Html.DropDownListFor(x => x.Album.Id, new SelectList(Model.AlbumsList, "Id", "Name"))
+        Песня <input type="file" name="Song" />
     </p>
     <p>
-        Песня <input type="file" name="Song"/>
-    </p>
-    <p>
-        <input type="submit" value="Сохранить"/>
+        <input type="submit" value="Сохранить" />
     </p>
 }

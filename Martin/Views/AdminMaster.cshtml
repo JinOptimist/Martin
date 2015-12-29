@@ -14,22 +14,19 @@
         <div class="float-left"><img class="navigation-top-logo" src="~/Content/img/logo_white_150x150.png" /></div>
         <ul style="float: right;">
             <li>
-                @Html.ActionLink("Go to Front", "Index", "Home")
+                @Html.ActionLink("Front", "Index", "Home")
             </li>
             <li>
-                @Html.ActionLink("All Album", "Index", "Album")
-            </li>
-            <li>
-                @Html.ActionLink("Add Album", "Add", "Album")
-            </li>
-            <li>
-                @Html.ActionLink("Add Song", "AddSong", "Album")
+                @Html.ActionLink("Albums", "Albums", "Album")
             </li>
             <li>
                 @Html.ActionLink("Font", "SaveNewFont", "Album")
             </li>
             <li>
                 @Html.ActionLink("Static", "AddStaticContent", "Album")
+            </li>
+            <li>
+                @Html.ActionLink("Artists", "Artists", "Album")
             </li>
             <li>
                 @Html.ActionLink("Exit", "Exit", "Home")

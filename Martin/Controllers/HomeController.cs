@@ -96,7 +96,7 @@ namespace Martin.Controllers
             if (artist == null) return View();
             
             FormsAuthentication.SetAuthCookie(artist.Id.ToString(), false);
-            return RedirectToAction("Index", "Album");
+            return RedirectToAction("Albums", "Album");
         }
 
         public ActionResult Exit()

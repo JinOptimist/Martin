@@ -6,7 +6,7 @@
         </li>
     </ul>
     <p class="player">
-        <audio id="mainMp3Player" controls preload="none" loop>
+        <audio id="mainMp3Player" controls preload="none">
             <source id="mainMp3Source" src="" type="audio/mpeg">
             Ваш браузер не поддерживает HTML 5. Вы можете только скачать треки.
         </audio>
@@ -15,10 +15,7 @@
 
     <ul style="float: right; margin-top: 8px;">
         <li>
-            @Html.ActionLink("Albums", "Index", "Home")
-        </li>
-        <li>
-            @Html.ActionLink("About", "About", "Home")
+            @Html.ActionLink("Contact", "About", "Home")
         </li>
         <li>
             @Html.ActionLink("Donate", "Donate", "Home")
@@ -30,7 +27,10 @@
             <a href="https://twitter.com/Martin_S_Online" target="_blank"><img class="social" src="@Url.Content("~/Content/img/twitter.png")" /></a>
         </li>
         <li>
-            <a href="http://www.youtube.com/user/matrinschannel" target="_blank"><img class="social" src="@Url.Content("~/Content/img/youtube.png")" /></a>
+            <a href="http://www.youtube.com/user/matrinschannel" target="_blank"><img class="social" src="@Url.Content("~/Content/img/youtube.png")"/></a>
+        </li>
+        <li>
+            <a href="https://www.instagram.com/martin_s_online/" target="_blank"><img class="social" src="@Url.Content("~/Content/img/instagram.png")" /></a>
         </li>
     </ul>
 </div>

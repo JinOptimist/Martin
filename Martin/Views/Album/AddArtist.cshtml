@@ -1,0 +1,23 @@
+﻿@model Dao.Model.Artist
+
+@{
+    ViewBag.Title = "AddArtist";
+    Layout = "~/Views/AdminMaster.cshtml";
+}
+
+<h2>Add Artist</h2>
+@using (Html.BeginForm("AddArtist", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x=>x.MegaAdmin)
+    <p>
+        Имя Артиста: @Html.TextBoxFor(x => x.Name)
+    </p>
+
+    <p>
+        Имя Артиста: @Html.PasswordFor(x => x.Password)
+    </p>
+    
+    <p>
+        <input type="submit" value="Сохранить" />
+    </p>
+}

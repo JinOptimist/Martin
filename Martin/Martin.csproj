@@ -148,11 +148,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\jquery.bxslider.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\img\add.png" />
     <Content Include="Content\img\bx_loader.gif" />
     <Content Include="Content\img\controls.png" />
     <Content Include="Content\img\dark_wall.png" />
     <Content Include="Content\img\down.png" />
     <Content Include="Content\img\edit.png" />
+    <Content Include="Content\img\instagram.png" />
     <Content Include="Content\img\left.png" />
     <Content Include="Content\img\logo_white_150x150.png" />
     <Content Include="Content\img\play.gif" />
@@ -584,6 +586,8 @@
     <Content Include="Views\Album\AddStaticContent.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Album\SaveNewFont.cshtml" />
+    <Content Include="Views\Album\AddArtist.cshtml" />
+    <Content Include="Views\Album\Artists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -598,7 +602,7 @@
     <Content Include="Views\FrontMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Album\Albums.cshtml" />
     <Content Include="Views\Album\Add.cshtml" />
     <Content Include="Views\Album\AddSong.cshtml" />
     <Content Include="Views\Home\About.cshtml" />

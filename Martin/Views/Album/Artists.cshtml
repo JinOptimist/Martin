@@ -1,0 +1,20 @@
+﻿@model List<Dao.Model.Artist>
+
+@{
+    ViewBag.Title = "Artists";
+    Layout = "~/Views/AdminMaster.cshtml";
+}
+
+<h2>Artists <a href="@Url.Action("AddArtist")"><img class="admin-icon" src="@Url.Content("~/Content/img/add.png")" /></a></h2>
+@if (Model != null)
+{
+    foreach (var artist in Model)
+    {
+        <div>
+            <p>@artist.Name
+                <a href="@Url.Action("DeleteArtist", new {id = artist.Id})"><img class="admin-icon" data-type="артист" data-name="@artist.Name" src="@Url.Content("~/Content/img/remove.png")"/></a>
+                <a href="@Url.Action("AddArtist", new {id = artist.Id})"><img class="admin-icon" src="@Url.Content("~/Content/img/edit.png")"/></a>
+            </p>
+        </div>
+    }
+}

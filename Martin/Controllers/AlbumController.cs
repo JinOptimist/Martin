@@ -6,6 +6,7 @@ using System.Web.Security;
 using Autofac;
 using Dao.IRepository;
 using Dao.Model;
+using Dao.Repository;
 using Martin.ViewModel;
 
 namespace Martin.Controllers
@@ -15,6 +16,7 @@ namespace Martin.Controllers
     {
         public IAlbumRepository AlbumRepository { get; set; }
         public ISongRepository SongRepository { get; set; }
+        public IArtistRepository ArtistRepository { get; set; }
         public IStaticContentRepository StaticContentRepository { get; set; }
 
         private static object locker = new object();
@@ -26,6 +28,7 @@ namespace Martin.Controllers
                 AlbumRepository = scope.Resolve<IAlbumRepository>();
                 SongRepository = scope.Resolve<ISongRepository>();
                 StaticContentRepository = scope.Resolve<IStaticContentRepository>();
+                ArtistRepository = scope.Resolve<IArtistRepository>();
             }
         }
 
@@ -45,7 +48,7 @@ namespace Martin.Controllers
             }
         }
 
-        public ActionResult Index()
+        public ActionResult Albums()
         {
             var model = AlbumRepository.GetAll();
             return View(model);
@@ -67,6 +70,8 @@ namespace Martin.Controllers
                 return View(album);
             }
 
+            album.Name = album.Name.Replace(".", string.Empty);
+
             var coverPath = SaveAttach("cover", Request.Files["Cover"]);
             var bgForAlbumPath = SaveAttach("cover", Request.Files["BgForAlbum"]);
             if (!string.IsNullOrEmpty(coverPath))
@@ -74,14 +79,17 @@ namespace Martin.Controllers
             if (!string.IsNullOrEmpty(bgForAlbumPath))
                 album.BackgroundFileName = bgForAlbumPath;
 
-            var order = AlbumRepository.Count() + 1;
-            album.Order = order;
+            if (album.Id <= 0)
+            {
+                var order = AlbumRepository.Count() + 1;
+                album.Order = order;
+            }
 
             AlbumRepository.Save(album);
 
             Directory.CreateDirectory(Path.Combine(Server.MapPath("~/Content/song/"), album.Name));
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
         }
 
         public ActionResult Edit(long id)
@@ -94,27 +102,27 @@ namespace Martin.Controllers
         {
             AlbumRepository.Delete(id);
             AlbumRepository.Reorder();
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
         }
 
         public ActionResult OrderUp(long id)
         {
             AlbumRepository.OrderUp(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
         }
 
         public ActionResult OrderDown(long id)
         {
             AlbumRepository.OrderDown(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
         }
 
         // -------------------- Song Region --------------------
 
-        public ActionResult AddSong()
+        public ActionResult AddSong(long albumId)
         {
             var model = new SongViewModel();
-            model.AlbumsList = AlbumRepository.GetAll().Select(x => new AlbumForListBox(x)).ToList();
+            model.Album = AlbumRepository.Get(albumId);
             return View(model);
         }
 
@@ -140,13 +148,13 @@ namespace Martin.Controllers
 
             song.Mp3FileName = songName;
             SongRepository.Save(song);
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
         }
 
         public ActionResult DeleteSong(long id)
         {
             SongRepository.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
         }
 
         // -------------------- Static Region --------------------
@@ -195,8 +203,8 @@ namespace Martin.Controllers
 
                 System.IO.File.Copy(DefaultFontPath, SuperPuperFontPath);
             }
-            
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Albums");
         }
 
         public ActionResult SaveNewFont()
@@ -213,7 +221,39 @@ namespace Martin.Controllers
 
             SaveNewFontFile(newFilePath);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Albums");
+        }
+
+        // -------------------- Artist Region --------------------
+
+        public ActionResult AddArtist(long? id)
+        {
+            var model = new Artist();
+            if (id.HasValue)
+            {
+                model = ArtistRepository.Get(id.Value);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddArtist(Artist artist)
+        {
+            ArtistRepository.Save(artist);
+            return RedirectToAction("Artists");
+        }
+
+        public ActionResult Artists()
+        {
+            var artists = ArtistRepository.GetAll().Where(x => !x.MegaAdmin).ToList();
+            return View(artists);
+        }
+
+        public ActionResult DeleteArtist(long id)
+        {
+            ArtistRepository.Delete(id);
+            return RedirectToAction("Artists");
         }
 
         private void SaveNewFontFile(string newFilePath)

@@ -1,24 +1,31 @@
 ﻿$(document).ready(function () {
+    var songs = [];
+    var songPlayedIndex = 0;
+
     $.ajaxSetup({ cache: false });
 
     function updateBackgroundImage() {
         $(".slide").css("background-image", "url(" + $("#albumBgImg").val() + ")");
     }
 
-    function playSong(obj) {
-        var songPath = $(obj).data("songpath");
-        var albumName = $(obj).data("albumname");
-        var songName = $(obj).data("songname");
+    function playCurrentSong() {
+        $(".playSong").removeClass("song-played");
+        $(".playSong[data-index='" + songPlayedIndex + "']").addClass("song-played");
 
-        $("#mainMp3Source").attr("src", songPath);
-        $("#nowPlaying").text(albumName + " - " + songName);
-
+        var song = songs[songPlayedIndex];
+        $("#mainMp3Source").attr("src", song.path);
+        $("#nowPlaying").text(song.albumName + " - " + song.songName);
         var music = $("#mainMp3Player")[0];
         music.load();
         music.play();
     }
 
-    function drawPlayByClass(className) {
+    function playSong(obj) {
+        songPlayedIndex = $(obj).data("index");
+        playCurrentSong();
+    }
+
+    function drawPlayByClassBlack(className) {//Old Black+
         var example = $("." + className);
         for (var i = 0; i < example.length; i++) {
             var current = example[i];
@@ -36,6 +43,35 @@
             ctx.lineTo(w, h / 2);
             ctx.lineTo(0, h);
             ctx.lineTo(0, 0);
+            ctx.fill();
+        }
+    }
+
+    function drawPlayByClass(className) {
+        var example = $("." + className);
+        for (var i = 0; i < example.length; i++) {
+            var current = example[i];
+            if (!current.getContext) {
+                return;
+            }
+            ctx = current.getContext('2d');
+            var w = current.width;
+            var h = current.height;
+            example.width = w;
+            example.height = h;
+
+            ctx.beginPath();
+            ctx.fillStyle = $(current).data("bgcolor");
+            ctx.arc(w / 2, h / 2, h / 2, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.fillStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.moveTo(w / 4, h / 4);
+            ctx.lineTo(w * 4 / 5, h / 2);
+            ctx.lineTo(w / 4, h * 3 / 4);
+            ctx.lineTo(w / 4, h / 4);
             ctx.fill();
         }
     }
@@ -73,6 +109,16 @@
         drawPlayByClass("playSong");
         drawDownloadByClass("downloadImg");
 
+        songs = [];
+        $(".playSong").each(function() {
+            var song = {
+                "path": $(this).data("songpath"),
+                "albumName": $(this).data("albumname"),
+                "songName": $(this).data("songname")
+            }
+            songs.push(song);
+        });
+
         var cuteUrl = $("#albumCuteUrl").val();
         window.history.pushState("Smile ^_^", "Title", cuteUrl);
     }
@@ -104,8 +150,10 @@
         openNewAlbum(this);
     });
 
-    $(document).on("click", ".downloadSong", function () {
-        //var songpath = $(this).data("songpath");
-        //window.location.href = songpath;
+    $("#mainMp3Player")[0].addEventListener('ended', function (e) {
+        songPlayedIndex++;
+        if (songPlayedIndex >= songs.length)
+            songPlayedIndex = 0;
+        playCurrentSong();
     });
 });
