@@ -9,10 +9,14 @@ namespace Dao.IRepository
 
         void Delete(long id);
 
+        void Order(long id, bool up);
+
         List<Song> GetAllForAlbum(long albumId);
 
         List<Song> GetAll();
 
         void Save(Song song);
+
+        int Count(long albumId);
     }
 }

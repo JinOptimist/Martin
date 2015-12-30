@@ -140,7 +140,6 @@
     <Compile Include="Utility\FileHelper.cs" />
     <Compile Include="Utility\StaticContentHelper.cs" />
     <Compile Include="ViewModel\AlbumsHomeViewModel.cs" />
-    <Compile Include="ViewModel\SongViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

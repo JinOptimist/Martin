@@ -4,6 +4,8 @@
     {
         public virtual long Id { get; set; }
 
+        public virtual int Order { get; set; }
+
         public virtual string Name { get; set; }
 
         //Text of record

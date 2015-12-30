@@ -26,14 +26,9 @@ namespace Dao.Repository
             return _db.Album.SingleOrDefault(x => x.Order == order);
         }
 
-        public void OrderUp(long id)
+        public void Order(long id, bool up)
         {
-            NewOrder(id, true);
-        }
-
-        public void OrderDown(long id)
-        {
-            NewOrder(id, false);
+            NewOrder(id, up);
         }
 
         public void Delete(long id)

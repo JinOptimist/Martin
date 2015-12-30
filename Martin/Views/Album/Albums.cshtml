@@ -29,16 +29,17 @@
 {
     foreach (var album in Model)
     {
+        <a name="album-@album.Id"></a>
         <div>
             <div class="admin-album-block clear-left">
                 <div>
                     <!--<p>№@album.Id</p>-->
                     <h1 style="margin-top: 0;">
                         @*@album.Order)*@ @album.Name
-                        <a href="@Url.Action("Delete", new {id = album.Id})"><img class="admin-icon" data-type="альбом" data-name="@album.Name" src="@Url.Content("~/Content/img/remove.png")" /></a>
+                        <a href="@Url.Action("Delete", new {id = album.Id})"><img class="admin-icon remove" data-type="альбом" data-name="@album.Name" src="@Url.Content("~/Content/img/remove.png")" /></a>
                         <a href="@Url.Action("Edit", new {id = album.Id})"><img class="admin-icon" src="@Url.Content("~/Content/img/edit.png")" /></a>
-                        <a href="@Url.Action("OrderUp", new {id = album.Id})"><img class="admin-icon" src="@Url.Content("~/Content/img/up.png")" /></a>
-                        <a href="@Url.Action("OrderDown", new {id = album.Id})"><img class="admin-icon" src="@Url.Content("~/Content/img/down.png")" /></a>
+                        <a href="@Url.Action("AlbumOrder", new {id = album.Id, up = true})"><img class="admin-icon" src="@Url.Content("~/Content/img/up.png")" /></a>
+                        <a href="@Url.Action("AlbumOrder", new { id = album.Id, up = false })"><img class="admin-icon" src="@Url.Content("~/Content/img/down.png")" /></a>
                     </h1>
                 </div>
                 <img class="admin-album-cover" src="@Url.Content("~/Content/cover/" + album.CoverFileName)" />
@@ -51,11 +52,14 @@
             </div>
             <div class="admin-album-block">
                 <p>Songs <a href="@Url.Action("AddSong", new { albumId = album.Id })"><img class="admin-icon" src="@Url.Content("~/Content/img/add.png")" /></a></p>
-                @foreach (var song in album.Songs)
+                @foreach (var song in album.Songs.OrderByDescending(x=>x.Order))
                 {
                     <p>
                         <a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a>
-                        <a href="@Url.Action("DeleteSong", new {id = song.Id})"><img class="remove" data-type="песню" data-name="@song.Name" src="@Url.Content("~/Content/img/remove.png")" /></a>
+                        <a href="@Url.Action("DeleteSong", new {id = song.Id})"><img class="remove" data-type="песню" data-name="@song.Name" src="@Url.Content("~/Content/img/remove.png")"/></a>
+                        <a href="@Url.Action("AddSong", new { albumId = song.Album.Id, songId = song.Id })"><img class="admin-icon" data-type="песню" data-name="@song.Name" src="@Url.Content("~/Content/img/edit.png")" / /></a>
+                        <a href="@Url.Action("SongOrder", new {id = song.Id, up = true})#album-@album.Id"><img class="admin-icon" src="@Url.Content("~/Content/img/up.png")" /></a>
+                        <a href="@Url.Action("SongOrder", new { id = song.Id, up = false })#album-@album.Id"><img class="admin-icon" src="@Url.Content("~/Content/img/down.png")" /></a>
                     </p>
                 }
             </div>

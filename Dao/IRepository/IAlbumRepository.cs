@@ -11,9 +11,7 @@ namespace Dao.IRepository
 
         Album GetByOrder(int order);
 
-        void OrderUp(long id);
-
-        void OrderDown(long id);
+        void Order(long id, bool up);
 
         void Delete(long id);
 

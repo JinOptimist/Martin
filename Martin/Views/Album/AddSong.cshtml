@@ -1,5 +1,4 @@
-﻿@using Dao.Model
-@model Martin.ViewModel.SongViewModel
+﻿@model Dao.Model.Song
 
 @{
     ViewBag.Title = "Song Add";
@@ -7,12 +6,24 @@
 }
 
 <h2>Song Add to Album @Model.Album.Name</h2>
+
 @using (Html.BeginForm("AddSong", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.Album.Id)
     <p>
         Название песни: @Html.TextBoxFor(x => x.Name)
     </p>
+
+    if (Model.Id > 0)
+    {
+        @Html.HiddenFor(x => x.Mp3FileName)
+        @Html.HiddenFor(x => x.Order)
+        <p>
+            Порядок: @Model.Order
+        </p>
+    }
+
 
     <p>
         Слова @Html.TextBoxFor(x => x.Lyrics)

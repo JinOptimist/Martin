@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201512281534316_AddUserLogin.Designer.cs">
       <DependentUpon>201512281534316_AddUserLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512300622142_SongOrder.cs" />
+    <Compile Include="Migrations\201512300622142_SongOrder.Designer.cs">
+      <DependentUpon>201512300622142_SongOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Model\Song.cs" />
@@ -119,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512281534316_AddUserLogin.resx">
       <DependentUpon>201512281534316_AddUserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512300622142_SongOrder.resx">
+      <DependentUpon>201512300622142_SongOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

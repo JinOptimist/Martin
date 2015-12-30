@@ -105,55 +105,60 @@ namespace Martin.Controllers
             return RedirectToAction("Albums");
         }
 
-        public ActionResult OrderUp(long id)
+        public ActionResult AlbumOrder(long id, bool up)
         {
-            AlbumRepository.OrderUp(id);
-            return RedirectToAction("Albums");
-        }
-
-        public ActionResult OrderDown(long id)
-        {
-            AlbumRepository.OrderDown(id);
+            AlbumRepository.Order(id, up);
             return RedirectToAction("Albums");
         }
 
         // -------------------- Song Region --------------------
 
-        public ActionResult AddSong(long albumId)
+        public ActionResult AddSong(long albumId, long? songId)
         {
-            var model = new SongViewModel();
-            model.Album = AlbumRepository.Get(albumId);
+            var model = new Song();
+            if (songId.HasValue)
+            {
+                model = SongRepository.Get(songId.Value);
+            }
+            else
+            {
+                model.Album = AlbumRepository.Get(albumId);
+            }
+
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddSong(SongViewModel songViewModel)
+        public ActionResult AddSong(Song model)
         {
-            var song = songViewModel.CreateSongModel();
-            var album = AlbumRepository.Get(song.Album.Id);
-
+            var album = AlbumRepository.Get(model.Album.Id);
             var folder = Path.Combine("song", album.Name);
             var songName = SaveAttach(folder, Request.Files["Song"]);
 
-            //var path = Path.Combine(Server.MapPath("~/Content/"), folder, songName);
-            //var tagFile = TagLib.File.Create(path);
-            //tagFile.Tag.Album = album.Name;
-            //tagFile.Tag.Genres = new[] { "Indie" };
-            //tagFile.Tag.AlbumArtists = new[] { "Martin S." };
-            //tagFile.Tag.Title = songName;
-            //tagFile.Tag.Lyrics = song.Lyrics;
-            //IPicture a = new AttachedPictureFrame();
-            //a.Data = new ByteVector();
-            //tagFile.Tag.Pictures = new IPicture[];
+            if (model.Id <= 0)
+            {
+                var order = SongRepository.Count(model.Album.Id) + 1;
+                model.Order = order;
+            }
 
-            song.Mp3FileName = songName;
-            SongRepository.Save(song);
+            if (model.Id <= 0 || !string.IsNullOrEmpty(songName))
+            {
+                model.Mp3FileName = songName;
+            }
+            
+            SongRepository.Save(model);
             return RedirectToAction("Albums");
         }
 
         public ActionResult DeleteSong(long id)
         {
             SongRepository.Delete(id);
+            return RedirectToAction("Albums");
+        }
+
+        public ActionResult SongOrder(long id, bool up)
+        {
+            SongRepository.Order(id, up);
             return RedirectToAction("Albums");
         }
 
