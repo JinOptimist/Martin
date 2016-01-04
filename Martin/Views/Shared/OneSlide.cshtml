@@ -45,7 +45,7 @@
                     @foreach (var song in currentAlbum.Songs)
                     {
                         var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
-                        <p>
+                        <p style="font-size: 20px;">
                             <canvas class="playSong" width="30" height="30"
                                     data-bgcolor="@currentAlbum.TextColor"
                                     data-songpath="@songPath"

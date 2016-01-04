@@ -11,8 +11,9 @@ namespace Dao.Model
         [Required]
         public virtual string Name { get; set; }
 
-        [Required]
         public virtual string Description { get; set; }
+
+        public virtual string ReadmeInArchive { get; set; }
 
         [Required]
         public virtual string CoverFileName { get; set; }

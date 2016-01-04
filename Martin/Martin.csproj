@@ -153,6 +153,7 @@
     <Content Include="Content\img\dark_wall.png" />
     <Content Include="Content\img\down.png" />
     <Content Include="Content\img\edit.png" />
+    <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\instagram.png" />
     <Content Include="Content\img\left.png" />
     <Content Include="Content\img\logo_white_150x150.png" />
@@ -166,7 +167,7 @@
     <Content Include="Content\img\wait.gif" />
     <Content Include="Content\img\youtube.png" />
     <Content Include="Global.asax" />
-    <Content Include="Content\font\superPuperFont.ttf" />
+    <None Include="Content\font\superPuperFont.ttf" />
     <Content Include="Content\font\defaultFont.ttf" />
     <None Include="Properties\PublishProfiles\live.pubxml" />
     <Content Include="Scripts\admin\staticContent.js" />

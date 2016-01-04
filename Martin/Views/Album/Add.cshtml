@@ -63,7 +63,10 @@
         @Html.ValidationMessageFor(x => x.TextColor)
     </p>
     <p>
-        Цвет текста: <input type="Color" id="TextColor" name="TextColor" value="@Model.TextColor" />
+        Цвет текста: <input type="Color" id="TextColor" name="TextColor" value="@Model.TextColor"/>
+    </p>
+    <p>
+        Readme.txt: @Html.TextAreaFor(x => x.ReadmeInArchive)
     </p>
     <p>
         <input type="submit" value="Сохранить" />

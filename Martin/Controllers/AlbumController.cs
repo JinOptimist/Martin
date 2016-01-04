@@ -7,6 +7,7 @@ using Autofac;
 using Dao.IRepository;
 using Dao.Model;
 using Dao.Repository;
+using Martin.Utility;
 using Martin.ViewModel;
 
 namespace Martin.Controllers
@@ -100,8 +101,22 @@ namespace Martin.Controllers
 
         public ActionResult Delete(long id)
         {
+            var album = AlbumRepository.Get(id);
+            var zipPath = Path.Combine(Server.MapPath("~/Content/Song"), album.Name + ".zip");
+            if (System.IO.File.Exists(zipPath))
+            {
+                System.IO.File.Delete(zipPath);
+            }
+
+            var albumPath = Path.Combine(Server.MapPath("~/Content/Song"), album.Name);
+            if (System.IO.File.Exists(albumPath))
+            {
+                System.IO.File.Delete(albumPath);
+            }
+
             AlbumRepository.Delete(id);
             AlbumRepository.Reorder();
+            
             return RedirectToAction("Albums");
         }
 

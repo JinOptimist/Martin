@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201512300622142_SongOrder.Designer.cs">
       <DependentUpon>201512300622142_SongOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601040627323_AddReadmeFileForAlbum.cs" />
+    <Compile Include="Migrations\201601040627323_AddReadmeFileForAlbum.Designer.cs">
+      <DependentUpon>201601040627323_AddReadmeFileForAlbum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Model\Song.cs" />
@@ -126,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512300622142_SongOrder.resx">
       <DependentUpon>201512300622142_SongOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601040627323_AddReadmeFileForAlbum.resx">
+      <DependentUpon>201601040627323_AddReadmeFileForAlbum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

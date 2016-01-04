@@ -124,6 +124,12 @@ namespace Martin.Controllers
                 var dataSource = new StaticDiskDataSource(globalMp3Path);
                 zipFile.Add(dataSource, Path.GetFileName(globalMp3Path));
             }
+
+            var readmePath = Server.MapPath("~/" + FileHelper.PathToSong(album.Name, "readme.txt"));
+            FileStandard.WriteAllText(readmePath, album.ReadmeInArchive);
+            var readmeDataSource = new StaticDiskDataSource(readmePath);
+            zipFile.Add(readmeDataSource, Path.GetFileName(readmePath));
+
             zipFile.CommitUpdate();
             zipFile.Close();
 
