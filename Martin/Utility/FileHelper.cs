@@ -24,5 +24,11 @@ namespace Martin.Utility
             var path = Path.Combine("Content", "cover", albumName, bgFileName);
             return path;
         }
+
+        public static string PathToCoverForAlbum(string coverFileName)
+        {
+            var path = Path.Combine("Content", "cover", coverFileName);
+            return path;
+        }
     }
 }

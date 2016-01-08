@@ -42,7 +42,7 @@
                     @{
                         var index = 0;
                     }
-                    @foreach (var song in currentAlbum.Songs)
+                    @foreach (var song in currentAlbum.Songs.OrderByDescending(x=>x.Order))
                     {
                         var songPath = @Url.Content("~/" + FileHelper.PathToSong(currentAlbum.Name, song.Mp3FileName));
                         <p style="font-size: 20px;">
@@ -56,10 +56,8 @@
                                                                                                     width="30" height="30"
                                                                                                     class="downloadSong downloadImg"
                                                                                                     data-bgcolor="@currentAlbum.TextColor"
-                                                                                                    data-songpath="@songPath">
-    @*<a href="@songPath">Скачать песню</a>*@
-    </canvas></a>
-                            @song.Name
+                                                                                                    data-songpath="@songPath">@*<a href="@songPath">Скачать песню</a>*@</canvas></a>
+                            @song.FullSongName()
                         </p>
                     }
                 </div>

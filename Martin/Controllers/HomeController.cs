@@ -109,8 +109,8 @@ namespace Martin.Controllers
         public FileResult GetAlbumInArchive(long idAlbum)
         {
             var album = AlbumRepository.Get(idAlbum);
-            var mp3Paths = album.Songs.Select(x => FileHelper.PathToSong(album.Name, x.Mp3FileName));
-            var zipPath = Path.Combine(Server.MapPath("~/Content/Song"), album.Name + ".zip");
+            var zipName = string.Format("Martin S. - {0}.zip", album.Name);
+            var zipPath = Path.Combine(Server.MapPath("~/Content/Song"), zipName);
             if (FileStandard.Exists(zipPath))
             {
                 FileStandard.Delete(zipPath);
@@ -118,17 +118,29 @@ namespace Martin.Controllers
 
             var zipFile = ZipFile.Create(zipPath);
             zipFile.BeginUpdate();
-            foreach (var mp3PathLocal in mp3Paths)
+
+            var count = 1;
+            // Add song in archive
+            foreach (var song in album.Songs)
             {
-                var globalMp3Path = Server.MapPath("~/" + mp3PathLocal);
+                var globalMp3Path = Server.MapPath("~/" + FileHelper.PathToSong(album.Name, song.Mp3FileName));
                 var dataSource = new StaticDiskDataSource(globalMp3Path);
-                zipFile.Add(dataSource, Path.GetFileName(globalMp3Path));
+                var cyrillicName = song.Name;
+                var romanName = cyrillicName.FromCyrillicToRomanAlphabet();
+                var songFileName = string.Format("{0}. Martin S. - {1}.mp3", count++, romanName);
+                zipFile.Add(dataSource, songFileName);
             }
 
+            // Add readme in archive
             var readmePath = Server.MapPath("~/" + FileHelper.PathToSong(album.Name, "readme.txt"));
             FileStandard.WriteAllText(readmePath, album.ReadmeInArchive);
             var readmeDataSource = new StaticDiskDataSource(readmePath);
             zipFile.Add(readmeDataSource, Path.GetFileName(readmePath));
+
+            // Add cover in archive
+            var coverPath = Server.MapPath("~/" + FileHelper.PathToCoverForAlbum(album.CoverFileName));
+            var coverDataSource = new StaticDiskDataSource(coverPath);
+            zipFile.Add(coverDataSource, Path.GetFileName(coverPath).FromCyrillicToRomanAlphabet());
 
             zipFile.CommitUpdate();
             zipFile.Close();

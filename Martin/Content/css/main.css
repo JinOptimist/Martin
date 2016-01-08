@@ -69,6 +69,11 @@ body, div, h3 {
     float: left;
 }
 
+#mainMp3Player {
+    height: 30px;
+}
+
+
 .playSong {
     /*width: 20px;
     height: 20px;*/

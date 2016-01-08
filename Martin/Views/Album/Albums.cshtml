@@ -1,4 +1,5 @@
-﻿@model List<Dao.Model.Album>
+﻿@using Martin.Utility
+@model List<Dao.Model.Album>
 
 @{
     ViewBag.Title = "Album";
@@ -56,7 +57,7 @@
                 @foreach (var song in album.Songs.OrderByDescending(x=>x.Order))
                 {
                     <p>
-                        <a href="@Url.Content("~/Content/song/" + song.Mp3FileName)">@song.Name</a>
+                        <a href="@Url.Action("GetSongMp3", "Home", new { songId = song.Id})">@song.FullSongName()</a>
                         <a href="@Url.Action("DeleteSong", new {id = song.Id})"><img class="remove" data-type="песню" data-name="@song.Name" src="@Url.Content("~/Content/img/remove.png")"/></a>
                         <a href="@Url.Action("AddSong", new { albumId = song.Album.Id, songId = song.Id })"><img class="admin-icon" data-type="песню" data-name="@song.Name" src="@Url.Content("~/Content/img/edit.png")" / /></a>
                         <a href="@Url.Action("SongOrder", new {id = song.Id, up = true})#album-@album.Id"><img class="admin-icon" src="@Url.Content("~/Content/img/up.png")" /></a>

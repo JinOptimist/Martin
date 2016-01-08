@@ -5,6 +5,11 @@
     Layout = "~/Views/AdminMaster.cshtml";
 }
 
+@section Script
+{
+    <script src="@Url.Content("~/Scripts/admin/addSong.js")"></script>
+}
+
 <h2>Song Add to Album @Model.Album.Name</h2>
 
 @using (Html.BeginForm("AddSong", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -12,19 +17,19 @@
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.Album.Id)
     <p>
-        Название песни: @Html.TextBoxFor(x => x.Name)
+        Название песни: @Html.TextBoxFor(x => x.Name) => <span id="fullSongName"></span>
     </p>
+    
 
     if (Model.Id > 0)
     {
         @Html.HiddenFor(x => x.Mp3FileName)
         @Html.HiddenFor(x => x.Order)
         <p>
-            Порядок: @Model.Order
+            Положение: <span id="visibleOrder">@(Model.Album.Songs.Count - Model.Order + 1)</span>
         </p>
     }
-
-
+    
     <p>
         Слова @Html.TextBoxFor(x => x.Lyrics)
     </p>

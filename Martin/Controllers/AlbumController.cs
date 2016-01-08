@@ -276,6 +276,24 @@ namespace Martin.Controllers
             return RedirectToAction("Artists");
         }
 
+        public ActionResult ClearSongName()
+        {
+            var songs = SongRepository.GetAll();
+            foreach (var song in songs)
+            {
+                if (song.Name.Contains("Martin S. - "))
+                {
+                    song.Name = song.Name.Replace("Martin S. - ", string.Empty);
+                }
+
+                SongRepository.Save(song);
+            }
+
+            return RedirectToAction("Albums");
+        }
+        
+        // --------- Util
+
         private void SaveNewFontFile(string newFilePath)
         {
             lock (locker)
