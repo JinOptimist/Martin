@@ -32,6 +32,7 @@
 @using (Html.BeginForm("Add", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Order)
     <p>
         @Html.ValidationMessageFor(x => x.Name)
         Имя альбома: @Html.TextBoxFor(x => x.Name)

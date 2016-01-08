@@ -12,6 +12,7 @@
         {
             cuteUrl = cuteUrl.Replace("%20", "-");
         }
+        cuteUrl = cuteUrl.CuteUrl();
     }
     <input type="hidden" id="albumId" value="@currentAlbum.Id"/>
     <input type="hidden" id="albumCuteUrl" value="@cuteUrl"/>

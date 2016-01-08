@@ -291,8 +291,8 @@ namespace Martin.Controllers
 
             return RedirectToAction("Albums");
         }
-        
-        // --------- Util
+
+        // -------------------- Util --------------------
 
         private void SaveNewFontFile(string newFilePath)
         {

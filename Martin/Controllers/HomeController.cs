@@ -69,7 +69,6 @@ namespace Martin.Controllers
             };
         }
 
-
         // -------------------- Static  --------------------
         public ActionResult About()
         {
@@ -161,6 +160,7 @@ namespace Martin.Controllers
             return File(fileBytes, "audio/mp3", fileName);
         }
 
+        // -------------------- Util --------------------
         private string RenderRazorViewToString(string viewName, object model)
         {
             ViewData.Model = model;
